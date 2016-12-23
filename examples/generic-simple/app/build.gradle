@@ -1,0 +1,45 @@
+plugins {
+    id 'com.gladed.androidgitversion' version '0.2.21'
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "com.remon.example.genericsimple"
+        archivesBaseName = "remotemonster-genericsimple"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionName androidGitVersion.name()
+        versionCode androidGitVersion.code()
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions{
+        exclude '/META-INF/LICENSE'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile(group: 'com.remon', name: 'remondroid', version: '0.0.11')
+    testCompile 'junit:junit:4.12'
+}
