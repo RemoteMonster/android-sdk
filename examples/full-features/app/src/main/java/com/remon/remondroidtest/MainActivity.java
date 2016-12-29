@@ -1,6 +1,7 @@
 package com.remon.remondroidtest;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -30,15 +31,28 @@ public class MainActivity extends AppCompatActivity {
     private PercentFrameLayout remoteRenderLayout;
     private Remon remon = null;
     private SharedPreferences pref = null;
+    public static final String[] MANDATORY_PERMISSIONS = {
+            "android.permission.INTERNET",
+            "android.permission.CAMERA",
+            "android.permission.RECORD_AUDIO",
+            "android.permission.MODIFY_AUDIO_SETTINGS",
+            "android.permission.ACCESS_NETWORK_STATE",
+            "android.permission.CHANGE_WIFI_STATE",
+            "android.permission.ACCESS_WIFI_STATE",
+            "android.permission.READ_PHONE_STATE",
+            "android.permission.BLUETOOTH",
+            "android.permission.BLUETOOTH_ADMIN",
+            "android.permission.WRITE_EXTERNAL_STORAGE"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        permissionRequest(Manifest.permission.RECORD_AUDIO);
-        permissionRequest(Manifest.permission.CAMERA);
-        permissionRequest(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            checkPermission(MANDATORY_PERMISSIONS);
+        }
         final EditText logbox = (EditText) findViewById(R.id.logBox);
         localRender = (SurfaceViewRenderer) findViewById(R.id.local_video_view);
         localRenderLayout = (PercentFrameLayout) findViewById(R.id.local_video_layout);
@@ -62,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Config config = new Config();
+                config.setServiceId("simpleapp");
+                config.setKey("e3ee6933a7c88446ba196b2c6eeca6762c3fdceaa6019f03");
                 config.setConfig(pref);
                 config.setLocalView(localRender);
                 config.setRemoteView(remoteRender);
@@ -123,12 +139,22 @@ public class MainActivity extends AppCompatActivity {
         this.runOnUiThread(new Runnable() {
             public void run() {
                 String stat = "State:"+ state.getState();
+                EditText et = (EditText)findViewById(R.id.statBox);
                 if (remon.getRemonContext()!=null && remon.getRemonContext().getChannel()!=null && remon.getRemonContext().getChannel().getId()!=null)
                     stat += "\nchId:"+remon.getRemonContext().getChannel().getId();
-                ((EditText)findViewById(R.id.statBox)).setText(stat);
+                et.setText(stat+"\n"+et.getText());
             }
         });
 
+    }
+    public void addMessage(final String msg){
+        this.runOnUiThread(new Runnable() {
+            public void run() {
+                EditText et = (EditText)findViewById(R.id.statBox);
+
+                et.setText(msg+"\n"+et.getText());
+            }
+        });
     }
 
     @Override
@@ -183,5 +209,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setChannelIdText(String channelIdText) {
         ((EditText)findViewById(R.id.channelNameInputBox)).setText(channelIdText);
+    }
+
+    @SuppressLint("NewApi")
+    private void checkPermission(String[] permissions) {
+        requestPermissions(permissions, 100);
     }
 }
