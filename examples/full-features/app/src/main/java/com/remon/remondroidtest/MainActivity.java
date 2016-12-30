@@ -24,6 +24,8 @@ import com.remon.remondroid.util.Logger;
 import org.webrtc.RendererCommon;
 import org.webrtc.SurfaceViewRenderer;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     private SurfaceViewRenderer localRender;
     private SurfaceViewRenderer remoteRender;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private PercentFrameLayout remoteRenderLayout;
     private Remon remon = null;
     private SharedPreferences pref = null;
+
+    private EditText editText1 = (EditText) findViewById(R.id.channelNameInputBox);
     public static final String[] MANDATORY_PERMISSIONS = {
             "android.permission.INTERNET",
             "android.permission.CAMERA",
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         remoteRenderLayout = (PercentFrameLayout) findViewById(R.id.remote_video_layout);
 
         Button settingsButton = (Button)findViewById(R.id.setupButton);
+        editText1.setText("demo"+ new Random().nextInt(99));
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
