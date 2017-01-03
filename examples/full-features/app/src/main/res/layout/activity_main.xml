@@ -30,7 +30,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:text="Con"
+                android:text="Connect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -56,12 +56,6 @@
                 android:id="@+id/closeButton"
                 android:layout_weight="1" />
 
-            <Button
-                android:text="Swch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/optButton"
-                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout

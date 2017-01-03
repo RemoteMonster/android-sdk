@@ -113,30 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 remon.close();
             }
         });
-        // option button click event
-        findViewById(R.id.optButton).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Config config = new Config();
-                config.setConfig(pref);
-                config.setLocalView(localRender);
-                config.setRemoteView(remoteRender);
-                if (remon !=null)return;
-                remon = new Remon(MainActivity.this, config, new RemonObserver(){
-                    @Override
-                    public void onStateChange(RemonState state) {
-                        super.onStateChange(state);
-                        setStatus(state);
-                        if (state==RemonState.INIT){
-                            remon.connectChannel("demo");
-                            updateVideoViewForInit();
 
-                        }
-                    }
-                });
-
-            }
-        });
     }
 
     public void setStatus(final RemonState state){
@@ -187,21 +164,6 @@ public class MainActivity extends AppCompatActivity {
         localRender.setMirror(false);
         localRender.requestLayout();
         remoteRender.requestLayout();
-    }
-
-    private void permissionRequest(String permission) {
-        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(MainActivity.this,permission);
-        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
-                    permission)) {
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[] {permission}, 1);
-                return;
-            }
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[] {permission}, 1);
-            return;
-        }
     }
 
     @Override
