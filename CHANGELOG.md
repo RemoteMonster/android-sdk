@@ -1,4 +1,7 @@
 # CHANGELOG
+## 0.2.4 (2017.01.09)
+speaker phone mode false안되는 것 수정
+
 ## 0.0.11 (2016.12.07)
 추가: 최초 배포
 

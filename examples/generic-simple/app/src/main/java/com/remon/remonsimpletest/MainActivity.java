@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     remon.connectChannel(("simpleRemon"));
-
+                    updateVideoViewForInit();
 
             }
         });
