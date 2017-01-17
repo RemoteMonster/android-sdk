@@ -40,6 +40,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile(group: 'com.remon', name: 'remondroid', version: '0.2.4')
+    compile(group: 'com.remon', name: 'remondroid', version: '0.2.5')
     testCompile 'junit:junit:4.12'
 }

@@ -41,5 +41,5 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
-    compile(group: 'com.remon', name: 'remondroid', version: '0.2.4')
+    compile(group: 'com.remon', name: 'remondroid', version: '0.2.5')
 }
