@@ -32,24 +32,40 @@ public class MainActivity extends AppCompatActivity {
             "android.permission.BLUETOOTH_ADMIN",
             "android.permission.WRITE_EXTERNAL_STORAGE"
     };
+    private SurfaceViewRenderer localRender = null;
+    private PercentFrameLayout localRenderLayout = null;
+    private SurfaceViewRenderer remoteRender = null;
+    private PercentFrameLayout remoteRenderLayout = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             checkPermission(MANDATORY_PERMISSIONS);
         }
+        localRender = (SurfaceViewRenderer) findViewById(R.id.local_video_view);
+        localRenderLayout = (PercentFrameLayout) findViewById(R.id.local_video_layout);
+        remoteRender = (SurfaceViewRenderer) findViewById(R.id.remote_video_view);
+        remoteRenderLayout = (PercentFrameLayout) findViewById(R.id.remote_video_layout);
 
         // key와 serviceid를 설정하지 않았기에 WIFI기반에서만 실행됨. site에서 키발급 신청 후 lte등에서 접속됨
         // You can't connect on this config cause you don't have key and serviceId. please request to homepage
         Config config = new com.remon.remondroid.Config();
-        config.setLocalView((SurfaceViewRenderer) findViewById(R.id.local_video_view));
-        config.setRemoteView((SurfaceViewRenderer) findViewById(R.id.remote_video_view));
+        config.setServiceId("simpleapp");
+        config.setKey("e3ee6933a7c88446ba196b2c6eeca6762c3fdceaa6019f03");
+        config.setLocalView(localRender);
+        config.setRemoteView(remoteRender);
 
 
-        remon = new Remon(MainActivity.this, config, new RemonObserver(){ });
+        try {
+            remon = new Remon(MainActivity.this, config, new RemonObserver(){ });
+        } catch (RemonException e) {
+            e.printStackTrace();
+        }
 
         findViewById(R.id.connectButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.disconnectButton).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                remon.close();
+            }
+        });
+
+        localRender.setZOrderMediaOverlay(true);
 
     }
 
@@ -69,14 +93,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateVideoViewForInit(){
-        SurfaceViewRenderer localRender = (SurfaceViewRenderer) findViewById(R.id.local_video_view);
-        PercentFrameLayout localRenderLayout = (PercentFrameLayout) findViewById(R.id.local_video_layout);
-        SurfaceViewRenderer remoteRender = (SurfaceViewRenderer) findViewById(R.id.remote_video_view);
-        PercentFrameLayout remoteRenderLayout = (PercentFrameLayout) findViewById(R.id.remote_video_layout);
+
         remoteRenderLayout.setPosition(0,0,100,100);
         localRenderLayout.setPosition(60,60,20,20);
-        localRender.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
-        localRender.setZOrderMediaOverlay(true);
+        remoteRender.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
+
 
         localRender.setMirror(false);
         remoteRender.requestLayout();
