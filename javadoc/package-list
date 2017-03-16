@@ -1,0 +1,6 @@
+com.remon.remondroid
+com.remon.remondroid.data
+com.remon.remondroid.util
+com.remon.remondroid.util.appender
+org.webrtc
+org.webrtc.voiceengine
