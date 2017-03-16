@@ -17,6 +17,7 @@ import android.widget.EditText;
 import com.remon.remondroid.Config;
 import com.remon.remondroid.PercentFrameLayout;
 import com.remon.remondroid.Remon;
+import com.remon.remondroid.RemonException;
 import com.remon.remondroid.RemonObserver;
 import com.remon.remondroid.RemonState;
 import com.remon.remondroid.util.Logger;
@@ -86,7 +87,11 @@ public class MainActivity extends AppCompatActivity {
                 config.setConfig(pref);
                 config.setLocalView(localRender);
                 config.setRemoteView(remoteRender);
-                remon = new Remon(MainActivity.this, config, new AppObserver(MainActivity.this,remon));
+                try {
+                    remon = new Remon(MainActivity.this, config, new AppObserver(MainActivity.this,remon));
+                } catch (RemonException e) {
+                    e.printStackTrace();
+                }
                 Logger.i("MainActivity","remon is created");
 
             }
