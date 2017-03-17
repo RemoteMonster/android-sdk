@@ -44,19 +44,19 @@ test:
 
   override:
     - ./gradlew test:
-        pwd: examples/full-features
+        pwd: examples/full
     - ./gradlew test:
-        pwd: examples/generic-simple
+        pwd: examples/generic
 
   post:
     - ./gradlew assemble:
-        pwd: examples/full-features
+        pwd: examples/full
     - ./gradlew assemble:
-        pwd: examples/generic-simple
+        pwd: examples/generic
     - cp -r app/build/outputs/apk/*.apk $CIRCLE_ARTIFACTS/:
-        pwd: examples/full-features
+        pwd: examples/full
     - cp -r app/build/outputs/apk/*.apk $CIRCLE_ARTIFACTS/:
-        pwd: examples/generic-simple
+        pwd: examples/generic
 
 deployment:
   release:
@@ -66,7 +66,7 @@ deployment:
       - git config user.name $CIRCLE_PROJECT_USERNAME
       - gren --override --data-source=commits
       - github-release release --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag $CIRCLE_TAG
-      - github-release upload --file $CIRCLE_ARTIFACTS/remotemonster-genericsimple-debug-$CIRCLE_TAG.apk
-      - github-release upload --file $CIRCLE_ARTIFACTS/remotemonster-genericsimple-release-unsigned-$CIRCLE_TAG.apk
-      - github-release upload --file $CIRCLE_ARTIFACTS/remotemonster-fullfeatures-debug-$CIRCLE_TAG.apk
-      - github-release upload --file $CIRCLE_ARTIFACTS/remotemonster-fullfeatures-release-unsigned-$CIRCLE_TAG.apk
+      - github-release upload --file $CIRCLE_ARTIFACTS/remon-simple-debug-$CIRCLE_TAG.apk
+      - github-release upload --file $CIRCLE_ARTIFACTS/remon-simple-release-unsigned-$CIRCLE_TAG.apk
+      - github-release upload --file $CIRCLE_ARTIFACTS/remon-full-debug-$CIRCLE_TAG.apk
+      - github-release upload --file $CIRCLE_ARTIFACTS/remon-full-release-unsigned-$CIRCLE_TAG.apk
