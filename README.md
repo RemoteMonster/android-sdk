@@ -12,5 +12,9 @@ examples 폴더에 사용예제가 담겨있습니다.
 docs 폴더에 API 문서가 담겨있습니다.
 - [docs](https://remotemonster.github.io/android-sdk/)
 
+## Changelog
+변경사항이 아래와 같이 기록되어 있습니다.
+- [Changelog](https://github.com/RemoteMonster/android-sdk/blob/master/CHANGELOG.md)
+
 ## 사용된 오픈소스 라이센스
 notice폴더에 사용된 오픈소스 라이센스의 세부 내용이 담겨있습니다.
