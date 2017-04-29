@@ -1,4 +1,9 @@
 # CHANGELOG
+## 0.2.49 (2017.04.29)
+- onInit과 onStateChange.INIT이벤트가 동일하게 Remon객체가 온전히 생성되었고 Remon서버와 연결되었을 때 호출되게 변경
+- 방송 기능 일부 추가(베타기능)
+- 항상 하나의 Remon객체만 호출되고 종료될 수 있는 singleton factory를 제공. RemonSingleFactory
+
 ## 0.2.4 (2017.01.09)
 speaker phone mode false안되는 것 수정
 
