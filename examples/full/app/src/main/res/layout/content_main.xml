@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @author    Lucas Choi <sw.maker.dm@gmail.com>
+  ~ Copyright (c) 2017 RemoteMonster, inc. All Right Reserved.
+  ~
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.remotemonster.remonrtc.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <com.remon.remondroid.PercentFrameLayout
+        android:id="@+id/localVideoLayout"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <org.webrtc.SurfaceViewRenderer
+            android:id="@+id/localVideoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.remon.remondroid.PercentFrameLayout>
+
+    <com.remon.remondroid.PercentFrameLayout
+        android:id="@+id/remoteVideoLayout"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <org.webrtc.SurfaceViewRenderer
+            android:id="@+id/remoteVideoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.remon.remondroid.PercentFrameLayout>
+
+    <TextView
+        android:id="@+id/tvChannelName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2.0"
+        android:shadowDy="2.0"
+        android:shadowRadius="1.0"/>
+</RelativeLayout>
