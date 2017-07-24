@@ -12,10 +12,8 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -29,20 +27,19 @@ import com.remon.remondroid.data.ChannelStatus
 import io.vrinda.kotlinpermissions.PermissionCallBack
 import io.vrinda.kotlinpermissions.PermissionsActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 
 class MainActivity : PermissionsActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     val REMON_KEY:String = "e3ee6933a7c88446ba196b2c6eeca6762c3fdceaa6019f03"
     val REMON_SERVICE_ID :String = "simpleapp"
-    public var isConnected:Boolean = false
+    var isConnected:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
         isConnected = false
@@ -61,8 +58,7 @@ class MainActivity : PermissionsActivity(), NavigationView.OnNavigationItemSelec
         drawer_layout.setDrawerListener(toggle)
         toggle.syncState()
 
-        val navigationView = findViewById(R.id.nav_view) as NavigationView
-        navigationView.setNavigationItemSelectedListener(this)
+        nav_view.setNavigationItemSelectedListener(this)
 
         requstPermissions()
     }
@@ -130,22 +126,25 @@ class MainActivity : PermissionsActivity(), NavigationView.OnNavigationItemSelec
     }
 
 
+
+
     lateinit var mRemon:RemonSingleFactory
     fun createRemon() {
         runOnUiThread {
-            remoteVideoLayout.setPosition(0, 0, 100, 100);
-            localVideoLayout.setPosition(0, 0, 100, 100);
-            remoteVideoLayout.requestLayout();
-            localVideoLayout.requestLayout();
+            remoteVideoLayout.setPosition(0, 0, 100, 100)
+            localVideoLayout.setPosition(0, 0, 100, 100)
+            remoteVideoLayout.requestLayout()
+            localVideoLayout.requestLayout()
         }
 
         var config = com.remon.remondroid.Config()
-        config.setKey(REMON_KEY);
-        config.setServiceId(REMON_SERVICE_ID);
-        config.setLocalView(localVideoView);
-        config.setRemoteView(remoteVideoView);
+        config.setKey(REMON_KEY)
+        config.setServiceId(REMON_SERVICE_ID)
+        config.setLocalView(localVideoView)
+        config.setRemoteView(remoteVideoView)
 
         mRemon = RemonSingleFactory()
+
         mRemon.createRemon(this@MainActivity , config, object: RemonObserver(){
             override fun onSearchChannels(channels: MutableList<Channel>?) {
                 super.onSearchChannels(channels)
@@ -258,8 +257,8 @@ class MainActivity : PermissionsActivity(), NavigationView.OnNavigationItemSelec
     }
 
     private class ListItemHolder(item: View?) {
-        public val tvChannelItemName: TextView
-        public val btnChannelJoin: Button
+        val tvChannelItemName: TextView
+        val btnChannelJoin: Button
         init {
             this.tvChannelItemName = item?.findViewById(R.id.tvChannelItemName) as TextView
             this.btnChannelJoin = item?.findViewById(R.id.btnChannelJoin) as Button
@@ -280,51 +279,15 @@ class MainActivity : PermissionsActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onBackPressed() {
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
     }
 
-    //    @Override
-    //    public boolean onCreateOptionsMenu(Menu menu) {
-    //        getMenuInflater().inflate(R.menu.main, menu);
-    //        return true;
-    //    }
-
-    //    @Override
-    //    public boolean onOptionsItemSelected(MenuItem item) {
-    //        int id = item.getItemId();
-    //
-    //        //noinspection SimplifiableIfStatement
-    //        if (id == R.id.action_settings) {
-    //            return true;
-    //        }
-    //
-    //        return super.onOptionsItemSelected(item);
-    //    }
-
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        //        int id = item.getItemId();
-        //
-        //        if (id == R.id.nav_camera) {
-        //            // Handle the camera action
-        //        } else if (id == R.id.nav_gallery) {
-        //
-        //        } else if (id == R.id.nav_slideshow) {
-        //
-        //        } else if (id == R.id.nav_manage) {
-        //
-        //        } else if (id == R.id.nav_share) {
-        //
-        //        } else if (id == R.id.nav_send) {
-        //
-        //        }
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        drawer.closeDrawer(GravityCompat.START)
+        drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
