@@ -1,4 +1,4 @@
-package com.remotemonster.remonrtc;
+package com.remon.remondroidtest;
 
 import org.junit.Test;
 
