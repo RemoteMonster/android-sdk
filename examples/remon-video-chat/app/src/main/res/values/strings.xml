@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RemonRTC</string>
+    <string name="app_name">Remon Video Chat</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

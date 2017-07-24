@@ -1,4 +1,4 @@
-package com.remotemonster.remonrtc;
+package com.remotemonster.remonvideochat;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

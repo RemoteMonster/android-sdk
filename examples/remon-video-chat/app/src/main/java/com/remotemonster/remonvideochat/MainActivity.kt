@@ -4,7 +4,7 @@
  *
  */
 
-package com.remotemonster.remonrtc
+package com.remotemonster.remonvideochat
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -294,5 +294,10 @@ class MainActivity : PermissionsActivity(), NavigationView.OnNavigationItemSelec
     override fun onPause() {
         if(isConnected && mRemon !=null) mRemon.close()
         super.onPause()
+    }
+
+    override fun onDestroy() {
+        if(mRemon !=null) mRemon.close()
+        super.onDestroy()
     }
 }
