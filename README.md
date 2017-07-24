@@ -5,8 +5,12 @@ WebRTC 기반의 앱과 웹을 위한 통화 클라우드, RemoteMonster의 브�
 
 ## Examples
 examples 폴더에 사용예제가 담겨있습니다.
-- [examples/full](https://github.com/RemoteMonster/android-sdk/tree/master/examples/full/)
-- [examples/simple](https://github.com/RemoteMonster/android-sdk/tree/master/examples/simple/)
+- [examples/full - java](https://github.com/RemoteMonster/android-sdk/tree/master/examples/full/)
+  - 다양한 설정을 조작하면서 테스트가 가능합니다.
+- [examples/simple - java](https://github.com/RemoteMonster/android-sdk/tree/master/examples/simple/)
+  - 간단하게 작동하는 코드를 확인할 수 있습니다.
+- [examples/remon-video-chat - kotlin](https://github.com/RemoteMonster/android-sdk/tree/master/examples/remon-video-chat)
+  - 영상통화를 사용해 볼 수 있습니다.
 
 ## 문서
 docs 폴더에 API 문서가 담겨있습니다.
