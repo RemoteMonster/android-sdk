@@ -48,17 +48,14 @@ dependencies {
     /* Kotlin */
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    /*Butter knife */
-    
-
     /* Remote monster WebRTC library */
-    compile(group: 'com.remon', name: 'remondroid', version: '0.2.67')
+    compile(group: 'com.remon', name: 'remondroid', version: '0.2.69')
 
     /* permission*/
+    compile 'io.vrinda.kotlinpermissions:kotlinpermissions:1.1'
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    compile 'io.vrinda.kotlinpermissions:kotlinpermissions:1.1'
     testCompile 'junit:junit:4.12'
 }
