@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ @author    Lucas Choi <lucas@remotemonster.com>
+  ~ Copyright (c) 2017 RemoteMonster, inc. All Right Reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:baselineAligned="false">
+    <LinearLayout
+        android:id="@+id/llChatInputBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="center_vertical"
+        android:background="@drawable/img_box"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imvChatInputFold"
+            android:layout_weight="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_chat_active"/>
+
+        <com.remotemonster.remonvideochat.BackPressEditText
+            android:id="@+id/etChatInput"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:inputType="text"
+            android:background="@null"
+            android:hint="Write message"
+            android:textColor="@android:color/white"
+            android:textCursorDrawable="@android:color/white"
+            android:textColorHint="@android:color/white" />
+        <ImageView
+            android:id="@+id/imvChatSend"
+            android:layout_weight="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_sending"/>
+    </LinearLayout>
+</LinearLayout>
