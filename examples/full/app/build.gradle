@@ -6,7 +6,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    //buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.remon.example.fullfeatures"
         archivesBaseName = "remotemonster-fullfeatures"
@@ -25,13 +25,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            output.outputFile = new File(
-                    output.outputFile.parent,
-                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
-        }
-    }
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            output.outputFile = new File(
+//                    output.outputFile.parent,
+//                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+//        }
+//    }
 }
 
 dependencies {
@@ -39,7 +39,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
-    compile(group: 'com.remon', name: 'remondroid', version: '0.2.48')
+    compile(group: 'com.remon', name: 'remondroid', version: '0.3.40')
+    annotationProcessor 'org.projectlombok:lombok:1.16.18'
 }

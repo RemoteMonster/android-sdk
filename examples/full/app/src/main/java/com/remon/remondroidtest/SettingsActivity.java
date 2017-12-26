@@ -103,13 +103,6 @@ public class SettingsActivity extends Activity implements SharedPreferences.OnSh
 
         updateSummary(sharedPreferences, keyPrefRoomServerUrl);
 
-        if (!Camera2Enumerator.isSupported()) {
-            Preference camera2Preference =
-                    settingsFragment.findPreference(keyprefCamera2);
-
-            camera2Preference.setSummary(getString(R.string.pref_camera2_not_supported));
-            camera2Preference.setEnabled(false);
-        }
 
         // Disable forcing WebRTC based AEC so it won't affect our value.
         // Otherwise, if it was enabled, isAcousticEchoCancelerSupported would always return false.

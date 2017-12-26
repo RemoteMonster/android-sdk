@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Remon remon = null;
     private SharedPreferences pref = null;
 
-    private EditText editText1 = (EditText) findViewById(R.id.channelNameInputBox);
+    private EditText editText1 = null;
     public static final String[] MANDATORY_PERMISSIONS = {
             "android.permission.INTERNET",
             "android.permission.CAMERA",
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             checkPermission(MANDATORY_PERMISSIONS);
         }
+        editText1 = (EditText) findViewById(R.id.channelNameInputBox);
         final EditText logbox = (EditText) findViewById(R.id.logBox);
         localRender = (SurfaceViewRenderer) findViewById(R.id.local_video_view);
         localRenderLayout = (PercentFrameLayout) findViewById(R.id.local_video_layout);
@@ -82,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Config config = new Config();
-                config.setServiceId("simpleapp");
-                config.setKey("e3ee6933a7c88446ba196b2c6eeca6762c3fdceaa6019f03");
+                config.setServiceId("SERVICEID1");
+                config.setKey("1234567890");
                 config.setConfig(pref);
                 config.setLocalView(localRender);
                 config.setRemoteView(remoteRender);
