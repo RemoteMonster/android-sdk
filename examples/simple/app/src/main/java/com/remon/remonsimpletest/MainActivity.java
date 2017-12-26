@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         // key와 serviceid를 설정하지 않았기에 WIFI기반에서만 실행됨. site에서 키발급 신청 후 lte등에서 접속됨
         // You can't connect on this config cause you don't have key and serviceId. please request to homepage
         Config config = new com.remon.remondroid.Config();
-        config.setServiceId("simpleapp");
-        config.setKey("e3ee6933a7c88446ba196b2c6eeca6762c3fdceaa6019f03");
+        config.setServiceId("SERVICEID1");
+        config.setKey("1234567890");
         config.setLocalView(localRender);
         config.setRemoteView(remoteRender);
 
