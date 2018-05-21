@@ -1,5 +1,5 @@
 # RemoteMonster Android SDK
-WebRTC 기반의 앱과 웹을 위한 통화 클라우드, RemoteMonster의 브라우저 SDK 입니다. 자세한 사용법은 아래 링크를 참고하세요.
+RemoteMonster의 안드로이드 SDK 입니다. 자세한 사용법은 아래 링크를 참고하세요.
 - [Website](https://remotemonster.com)
 - [Documents](https://docs.remotemonster.com/ko/)
 
@@ -7,10 +7,10 @@ WebRTC 기반의 앱과 웹을 위한 통화 클라우드, RemoteMonster의 브�
 examples 폴더에 사용예제가 담겨있습니다.
 - [examples/full](https://github.com/RemoteMonster/android-sdk/tree/master/examples/full/)
   - (Java) 다양한 설정을 조작하면서 테스트가 가능합니다.
-- [examples/simple](https://github.com/RemoteMonster/android-sdk/tree/master/examples/simple/)
-  - (Java) 간단하게 작동하는 코드를 확인할 수 있습니다.
 - [examples/remon-video-chat](https://github.com/RemoteMonster/android-sdk/tree/master/examples/remon-video-chat)
   - (Kotlin) 영상통화를 사용해 볼 수 있습니다.
+  - https://play.google.com/store/apps/details?id=com.remotemonster.remonrtc
+  - 위 주소를 통해 플레이스토어에서 앱을 직접 다운로드 및 설치 사용 가능합니다.
 
 ## 문서
 docs 폴더에 API 문서가 담겨있습니다.
