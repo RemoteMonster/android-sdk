@@ -1,7 +1,7 @@
 # RemoteMonster Android SDK
 RemoteMonster의 안드로이드 SDK 입니다. 자세한 사용법은 아래 링크를 참고하세요.
 - [Website](https://remotemonster.com)
-- [Documents](https://docs.remotemonster.com/ko/)
+- [Documents](https://docs.remotemonster.com/)
 
 ## Examples
 examples 폴더에 사용예제가 담겨있습니다.
