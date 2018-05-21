@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    tools:context="com.remon.sdktest.com.remotemonster.remontest.sample.RouterActivity">
+
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/btnRemonCall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:text="Call"
+        android:backgroundTint="@color/colorPrimaryDark"/>
+
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/btnRemonCast"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:text="Cast"
+        android:backgroundTint="@color/colorPrimaryDark"/>
+</LinearLayout>
