@@ -14,7 +14,7 @@ android {
         multiDexEnabled true
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
-        testInstrumentationRunner "android.support.volumeControlStream.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "android.support.volumeControlStream.runner.AndroidJUnitRunner"
 
     }
     configurations.all {
@@ -46,14 +46,14 @@ dependencies {
     })
 
     /* Remote monster WebRTC library */
-    compile 'com.remon:remondroid:2.0.0'
+    compile 'com.remon:remondroid:2.0.3'
 
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
 
     testCompile 'junit:junit:4.12'
-    compile 'org.projectlombok:lombok:1.16.18'
-    annotationProcessor 'org.projectlombok:lombok:1.16.18'
+//    compile 'org.projectlombok:lombok:1.16.18'
+//    annotationProcessor 'org.projectlombok:lombok:1.16.18'
 
     /* Butter knife */
     compile 'com.jakewharton:butterknife:8.4.0'
