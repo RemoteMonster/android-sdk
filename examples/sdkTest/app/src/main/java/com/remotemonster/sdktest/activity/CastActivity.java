@@ -150,7 +150,7 @@ public class CastActivity extends AppCompatActivity {
             remonCast.onComplete(() -> addLog("onComplete"));
             remonCast.onClose(() -> addLog("onClose"));
             remonCast.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
-            remonCast.onStat(report -> addLog("Print report"));
+            remonCast.onStat(report -> addLog(report.getFullStatReport()));
         }
     }
 
