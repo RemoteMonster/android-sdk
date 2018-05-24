@@ -1,6 +1,7 @@
-com.remon.remondroid
-com.remon.remondroid.data
-com.remon.remondroid.util
-com.remon.remondroid.util.appender
-org.webrtc
-org.webrtc.voiceengine
+com.remotemonster.sdk
+com.remotemonster.sdk.core
+com.remotemonster.sdk.data
+com.remotemonster.sdk.network
+com.remotemonster.sdk.stat
+com.remotemonster.sdk.util
+com.remotemonster.sdk.util.appender
