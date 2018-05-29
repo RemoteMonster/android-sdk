@@ -10,7 +10,7 @@ RemoteMonster - Livecast Management in the Cloud
 
 ### Package Manager
 
-```groovy
+```gradle
 // build.gradle(project:name)
 
 allprojects {
@@ -22,7 +22,7 @@ allprojects {
 }
 ```
 
-```groovy
+```gradle
 // build.gradle(Module:app)
 
 dependencies {
