@@ -26,13 +26,13 @@ allprojects {
 // build.gradle(Module:app)
 
 dependencies {
-    compile 'com.remon:remondroid:2.0.2'
+    compile 'com.remotemonster:sdk:2.0.4'
 }
 ```
 
 ### Downloads
 
-* [Download latest](https://github.com/RemoteMonster/android-sdk/archive/master.zip)
+* [Downloads](https://github.com/RemoteMonster/android-sdk/releases/)
 
 ## Examples
 
