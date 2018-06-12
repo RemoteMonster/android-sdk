@@ -1,3 +1,4 @@
+com.remon.sdktest
 com.remotemonster.sdk
 com.remotemonster.sdk.core
 com.remotemonster.sdk.data
@@ -5,3 +6,5 @@ com.remotemonster.sdk.network
 com.remotemonster.sdk.stat
 com.remotemonster.sdk.util
 com.remotemonster.sdk.util.appender
+com.remotemonster.sdktest
+com.remotemonster.sdktest.sample
