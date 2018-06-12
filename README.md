@@ -1,4 +1,4 @@
-[![Maven metadata URI](https://img.shields.io/maven-metadata/v/https/demo.remotemonster.com/artifactory/libs-release-local/com/remon/remondroid/maven-metadata.xml.svg)](https://demo.remotemonster.com/artifactory/libs-release-local)
+[![Bintray](https://img.shields.io/bintray/v/remotemonster/maven/remotemonster-sdk.svg)](https://bintray.com/remotemonster/maven/remotemonster-sdk)
 
 # RemoteMonster Android SDK
 
@@ -11,22 +11,10 @@ RemoteMonster - Livecast Management in the Cloud
 ### Package Manager
 
 ```gradle
-// build.gradle(project:name)
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        maven { url 'https://demo.remotemonster.com/artifactory/libs-release-local' }
-    }
-}
-```
-
-```gradle
 // build.gradle(Module:app)
 
 dependencies {
-    compile 'com.remotemonster:sdk:2.0.4'
+    compile 'com.remotemonster:sdk:2.0.12'
 }
 ```
 
