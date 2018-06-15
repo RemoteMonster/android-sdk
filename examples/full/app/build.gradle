@@ -46,7 +46,7 @@ dependencies {
     })
 
     /* Remote monster WebRTC library */
-    compile 'com.remon:remondroid:2.0.3'
+    compile 'com.remotemonster:sdk:2.0.16'
 
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'

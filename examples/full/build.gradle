@@ -18,7 +18,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https://demo.remotemonster.com/artifactory/libs-release-local' }
     }
 }
 
