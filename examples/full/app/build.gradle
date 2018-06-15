@@ -3,10 +3,8 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 25
-    //buildToolsVersion '26.0.1'
-
     defaultConfig {
-        applicationId "com.remotemonster.sdktest"
+        applicationId "com.remon.remontest"
         minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
@@ -14,7 +12,7 @@ android {
         multiDexEnabled true
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
-//        testInstrumentationRunner "android.support.volumeControlStream.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.volumeControlStream.runner.AndroidJUnitRunner"
 
     }
     configurations.all {
@@ -45,22 +43,28 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.google.firebase:firebase-core:10.2.6'
+    compile 'com.google.firebase:firebase-auth:10.2.6'
+    compile 'com.google.android.gms:play-services-auth:10.2.6'
+    compile 'com.google.firebase:firebase-database:10.2.6'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
     /* Remote monster WebRTC library */
     compile 'com.remotemonster:sdk:2.0.16'
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.github.mmin18:realtimeblurview:1.1.0'
     compile 'com.android.support:design:25.3.1'
-
     testCompile 'junit:junit:4.12'
-//    compile 'org.projectlombok:lombok:1.16.18'
-//    annotationProcessor 'org.projectlombok:lombok:1.16.18'
+    compile 'org.projectlombok:lombok:1.16.18'
+    annotationProcessor 'org.projectlombok:lombok:1.16.18'
 
     /* Butter knife */
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     /**
-     *  MultiDex Libararry
+     *  MultiDex Libarary
      */
     compile 'com.android.support:multidex:1.0.1'
 }

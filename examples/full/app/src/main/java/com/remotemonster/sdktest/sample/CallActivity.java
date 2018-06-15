@@ -1,4 +1,4 @@
-package com.remotemonster.sdktest.activity;
+package com.remotemonster.sdktest.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,9 @@ import android.widget.TextView;
 import com.remotemonster.sdk.Config;
 import com.remotemonster.sdk.PercentFrameLayout;
 import com.remotemonster.sdk.RemonCall;
-import com.remotemonster.sdktest.ConfigDialog;
-import com.remotemonster.sdktest.R;
-import com.remotemonster.sdktest.RemonApplication;
+import com.remon.sdktest.R;
 
-import org.webrtc.SurfaceViewRenderer;
+import com.remotemonster.sdk.core.SurfaceViewRenderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,7 +72,7 @@ public class CallActivity extends AppCompatActivity {
                 remonCall = new RemonCall();
                 remonCall.setContext(CallActivity.this);
                 setCallback();
-                remonCall.connectChannel(connectChId, config);
+                remonCall.connect(connectChId, config);
             });
             configDialog.show();
         } else {
@@ -89,7 +87,7 @@ public class CallActivity extends AppCompatActivity {
                     remonCall = new RemonCall();
                     remonCall.setContext(CallActivity.this);
                     setCallback();
-                    remonCall.connectChannel(connectChId, config);
+                    remonCall.connect(connectChId, config);
 
                 });
                 configDialog.show();
@@ -102,7 +100,7 @@ public class CallActivity extends AppCompatActivity {
                         .key(remonApplication.getConfig().getKey())
                         .build();
                 setCallback();
-                remonCall.connectChannel(connectChId);
+                remonCall.connect(connectChId);
             }
         }
 
@@ -116,7 +114,7 @@ public class CallActivity extends AppCompatActivity {
 
     private void setCallback() {
         remonCall.onInit(() -> addLog("onInit"));
-        remonCall.onConnect(() -> addLog("onConnect"));
+        remonCall.onConnect((String id) -> addLog("onCreate : " + id));
         remonCall.onComplete(() -> addLog("onComplete"));
         remonCall.onClose(() -> addLog("onClose"));
         remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString()));

@@ -1,20 +1,26 @@
-package com.remotemonster.sdktest;
+package com.remotemonster.sdktest.sample;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.remotemonster.sdk.Config;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by lucas on 2018. 5. 16..
  */
 
+@Getter
+@Setter
 public class RemonApplication extends Application {
     private Config config;
-    private static final String REST_HOST = "https://signal.remotemonster.com/rest/";
-    private static final String WSS_HOST = "wss://signal.remotemonster.com/ws";
+    public static final String REST_HOST = "https://matiz.remotemonster.com/rest/";
+    public static final String WSS_HOST = "wss://matiz.remotemonster.com/ws";
 //    public static final String WS_HOST = "ws://signal.remotemonster.com:8081/ws";
 
     @Override
@@ -45,13 +51,5 @@ public class RemonApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(getBaseContext());
-    }
-
-    public Config getConfig() {
-        return config;
-    }
-
-    public void setConfig(Config config) {
-        this.config = config;
     }
 }

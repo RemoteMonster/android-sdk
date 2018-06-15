@@ -1,8 +1,9 @@
-package com.remotemonster.sdktest.activity;
+package com.remotemonster.sdktest.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -12,11 +13,9 @@ import android.widget.TextView;
 import com.remotemonster.sdk.Config;
 import com.remotemonster.sdk.PercentFrameLayout;
 import com.remotemonster.sdk.RemonCast;
-import com.remotemonster.sdktest.ConfigDialog;
-import com.remotemonster.sdktest.R;
-import com.remotemonster.sdktest.RemonApplication;
+import com.remon.sdktest.R;
 
-import org.webrtc.SurfaceViewRenderer;
+import com.remotemonster.sdk.core.SurfaceViewRenderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +47,7 @@ public class CastActivity extends AppCompatActivity {
     private RemonApplication remonApplication;
     private String connectChId;
     private RemonCast remonCast = null;
-    private RemonCast remonViewer = null;
+    private RemonCast castViewer = null;
     private boolean isCastView = false;
 
     @Override
@@ -67,14 +66,15 @@ public class CastActivity extends AppCompatActivity {
                 Config config;
                 config = remonApplication.getConfig();
                 config.setLocalView(surfRendererLocal);
-
+                config.logLevel = 2;
+                config.setAudioStartBitrate(100);
+                config.setNoAudioProcessing(true);
                 connectChId = chid;
-
                 remonCast = new RemonCast();
                 remonCast.setContext(CastActivity.this);
 
                 setCallback(false);
-                remonCast.createRoom(connectChId, config);
+                remonCast.create(connectChId, config);
             });
             configDialog.show();
         } else {
@@ -87,19 +87,22 @@ public class CastActivity extends AppCompatActivity {
                     config.setRemoteView(surfRendererRemote);
 
                     remonCast = new RemonCast();
+                    remonCast.setContext(CastActivity.this);
                     setCallback(false);
-                    remonCast.joinRoom(connectChId, config);
+                    remonCast.join(connectChId, config);
                 });
                 configDialog.show();
             } else {
-                remonViewer = RemonCast.builder()
+                castViewer = RemonCast.builder()
                         .context(CastActivity.this)
                         .remoteView(surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
+                        .restUrl(remonApplication.getConfig().restHost)
+                        .wssUrl(remonApplication.getConfig().socketUrl)
                         .build();
                 setCallback(true);
-                remonViewer.joinRoom(connectChId);
+                castViewer.join(connectChId);
             }
         }
 
@@ -109,10 +112,9 @@ public class CastActivity extends AppCompatActivity {
             if (remonCast != null) {
                 remonCast.close();
             }
-            if (remonViewer != null) {
-                remonViewer.close();
+            if (castViewer != null) {
+                castViewer.close();
             }
-
         });
 
 
@@ -121,36 +123,38 @@ public class CastActivity extends AppCompatActivity {
         btnViewCast.setOnClickListener(v -> {
             if (!isCastView) {
                 /* 자신이 시청중이 아니라면 방송시청*/
-                remonViewer = RemonCast.builder()
+                castViewer = RemonCast.builder()
                         .context(CastActivity.this)
                         .remoteView(surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
+                        .restUrl(remonApplication.getConfig().restHost)
+                        .wssUrl(remonApplication.getConfig().socketUrl)
                         .build();
                 setCallback(true);
-                remonViewer.joinRoom(remonCast.getId());
+                castViewer.join(remonCast.getId());
             }
         });
     }
 
     private void setCallback(boolean isCastView) {
         if (isCastView) {
-            remonViewer.onInit(() -> addLog("onInit"));
-            remonViewer.onConnect(() -> addLog("onConnect"));
-            remonViewer.onComplete(() -> {
+            castViewer.onInit(() -> addLog("onInit"));
+            castViewer.onComplete(() -> {
                 addLog("onComplete");
                 this.isCastView = isCastView;
             });
-            remonViewer.onClose(() -> addLog("onClose"));
-            remonViewer.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
-            remonViewer.onStat(report -> addLog("Print report"));
+            castViewer.onJoin(() -> addLog("onJoin"));
+            castViewer.onClose(() -> finish());
+            castViewer.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
+            castViewer.onStat(report -> addLog("Print report"));
         } else {
             remonCast.onInit(() -> addLog("onInit"));
-            remonCast.onConnect(() -> addLog("onConnect"));
+            remonCast.onCreate((String id) -> addLog("onCreate : " + id));
             remonCast.onComplete(() -> addLog("onComplete"));
-            remonCast.onClose(() -> addLog("onClose"));
+            remonCast.onClose(() -> finish());
             remonCast.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
-            remonCast.onStat(report -> addLog(report.getFullStatReport()));
+            remonCast.onStat(report -> addLog("Print report"));
         }
     }
 
@@ -176,9 +180,33 @@ public class CastActivity extends AppCompatActivity {
         if (remonCast != null) {
             remonCast.close();
         }
-        if (remonViewer != null) {
-            remonViewer.close();
+        if (castViewer != null) {
+            castViewer.close();
         }
         super.onDestroy();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                try {
+                    remonCast.volumeDown();
+                    castViewer.volumeDown();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                try {
+                    remonCast.volumeUp();
+                    castViewer.volumeUp();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
+

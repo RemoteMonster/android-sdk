@@ -33,6 +33,7 @@
             android:layout_weight="1"
             android:id="@+id/etChannelName"
             android:layout_marginLeft="10dp"
+            android:inputType="textCapSentences"
             android:paddingLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

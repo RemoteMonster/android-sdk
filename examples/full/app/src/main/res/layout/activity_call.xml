@@ -73,7 +73,7 @@
                 android:id="@+id/perFrameLocal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <org.webrtc.SurfaceViewRenderer
+                <com.remotemonster.sdk.core.SurfaceViewRenderer
                     android:id="@+id/surfRendererLocal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -106,7 +106,7 @@
                 android:id="@+id/perFrameRemote"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <org.webrtc.SurfaceViewRenderer
+                <com.remotemonster.sdk.core.SurfaceViewRenderer
                     android:id="@+id/surfRendererRemote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

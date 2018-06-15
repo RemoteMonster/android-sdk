@@ -1,4 +1,4 @@
-package com.remotemonster.sdktest.activity;
+package com.remotemonster.sdktest.sample;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +19,7 @@ import android.widget.TextView;
 import com.remotemonster.sdk.RemonCall;
 import com.remotemonster.sdk.RemonCast;
 import com.remotemonster.sdk.data.Room;
-import com.remotemonster.sdktest.R;
-import com.remotemonster.sdktest.RemonApplication;
-import com.remotemonster.sdktest.ServiceIdDialog;
+import com.remon.sdktest.R;
 
 import java.util.ArrayList;
 
@@ -65,13 +63,12 @@ public class ListActivity extends AppCompatActivity {
                 Intent intentCreate = new Intent(ListActivity.this, CallActivity.class);
                 intentCreate.putExtra("isCreate", true);
                 startActivity(intentCreate);
-            } else {
+            } else if (remonType == 1){
                 remonCast.close();
                 Intent intentCreate = new Intent(ListActivity.this, CastActivity.class);
                 intentCreate.putExtra("isCreate", true);
                 startActivity(intentCreate);
             }
-
         });
     }
 
@@ -83,9 +80,11 @@ public class ListActivity extends AppCompatActivity {
                     .context(ListActivity.this)
                     .serviceId(remonApplication.getConfig().getServiceId())
                     .key(remonApplication.getConfig().getKey())
+                    .restUrl(remonApplication.getConfig().restHost)
+                    .wssUrl(remonApplication.getConfig().socketUrl)
                     .build();
-            remonCall.onInit(() -> remonCall.searchCalls());
-            remonCall.onSearch(rooms -> {
+            remonCall.onInit(() -> remonCall.fetchCalls());
+            remonCall.onFetch(rooms -> {
                 for (Room room : rooms) {
                     mRoomList.add(room);
                 }
@@ -97,9 +96,11 @@ public class ListActivity extends AppCompatActivity {
                     .context(ListActivity.this)
                     .serviceId(remonApplication.getConfig().getServiceId())
                     .key(remonApplication.getConfig().getKey())
+                    .restUrl(remonApplication.getConfig().restHost)
+                    .wssUrl(remonApplication.getConfig().socketUrl)
                     .build();
-            remonCast.onInit(() -> remonCast.searchRooms());
-            remonCast.onSearch(rooms -> {
+            remonCast.onInit(() -> remonCast.fetchCasts());
+            remonCast.onFetch(rooms -> {
                 for (Room room : rooms) {
                     mRoomList.add(room);
                 }
@@ -163,20 +164,18 @@ public class ListActivity extends AppCompatActivity {
             channelItemViewHolder.tvRoomInfo.setText(mRoomList.get(position).getId());
             channelItemViewHolder.tvStatus.setText(mRoomList.get(position).getStatus());
             channelItemViewHolder.tvRoomInfo.setOnClickListener(v -> {
-                if (!mRoomList.get(position).getStatus().equals("COMPLETE")) {
-                    if (remonType == 0) {
-                        remonCall.close();
-                        Intent intent = new Intent(ListActivity.this, CallActivity.class);
-                        intent.putExtra("isCreate", false);
-                        intent.putExtra("chid", mRoomList.get(position).getId());
-                        startActivity(intent);
-                    } else {
-                        remonCast.close();
-                        Intent intent = new Intent(ListActivity.this, CastActivity.class);
-                        intent.putExtra("isCreate", false);
-                        intent.putExtra("chid", mRoomList.get(position).getId());
-                        startActivity(intent);
-                    }
+                if (remonType == 0) {
+                    remonCall.close();
+                    Intent intent = new Intent(ListActivity.this, CallActivity.class);
+                    intent.putExtra("isCreate", false);
+                    intent.putExtra("chid", mRoomList.get(position).getId());
+                    startActivity(intent);
+                } else if (remonType == 1) {
+                    remonCast.close();
+                    Intent intent = new Intent(ListActivity.this, CastActivity.class);
+                    intent.putExtra("isCreate", false);
+                    intent.putExtra("chid", mRoomList.get(position).getId());
+                    startActivity(intent);
                 }
             });
 
@@ -189,7 +188,7 @@ public class ListActivity extends AppCompatActivity {
                         intent.putExtra("setConfig", true);
                         intent.putExtra("chid", mRoomList.get(position).getId());
                         startActivity(intent);
-                    } else {
+                    } else if(remonType == 1){
                         remonCast.close();
                         Intent intent = new Intent(ListActivity.this, CastActivity.class);
                         intent.putExtra("isCreate", false);

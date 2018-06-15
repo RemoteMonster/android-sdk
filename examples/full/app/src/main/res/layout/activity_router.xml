@@ -3,29 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_vertical"
-    tools:context="com.remon.sdktest.com.remotemonster.remontest.sample.RouterActivity">
+    android:orientation="vertical">
 
-    <Button
-        android:layout_weight="1"
-        android:id="@+id/btnRemonCall"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="40dp"
-        android:text="Call"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+        android:orientation="vertical">
 
-    <Button
-        android:layout_weight="1"
-        android:id="@+id/btnRemonCast"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="40dp"
-        android:text="Cast"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+        <Button
+            android:id="@+id/btnRemonCall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Call"
+            android:textColor="@android:color/white"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnRemonCast"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Cast"
+            android:textColor="@android:color/white"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </LinearLayout>
