@@ -10,11 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.remon.sdktest.R;
 import com.remotemonster.sdk.Config;
 import com.remotemonster.sdk.PercentFrameLayout;
 import com.remotemonster.sdk.RemonCall;
-import com.remon.sdktest.R;
-
 import com.remotemonster.sdk.core.SurfaceViewRenderer;
 
 import butterknife.BindView;
@@ -58,7 +57,6 @@ public class CallActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         remonApplication = (RemonApplication) getApplicationContext();
 
-
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isCreate", false)) {
             ConfigDialog configDialog = new ConfigDialog(CallActivity.this, true, chid -> {
@@ -66,7 +64,8 @@ public class CallActivity extends AppCompatActivity {
                 config = remonApplication.getConfig();
                 config.setLocalView(surfRendererLocal);
                 config.setRemoteView(surfRendererRemote);
-
+                config.setRestHost(remonApplication.getConfig().restHost);
+                config.setSocketUrl(remonApplication.getConfig().socketUrl);
                 connectChId = chid;
 
                 remonCall = new RemonCall();
@@ -83,7 +82,8 @@ public class CallActivity extends AppCompatActivity {
                     config = remonApplication.getConfig();
                     config.setLocalView(surfRendererLocal);
                     config.setRemoteView(surfRendererRemote);
-
+                    config.setRestHost(remonApplication.getConfig().restHost);
+                    config.setSocketUrl(remonApplication.getConfig().socketUrl);
                     remonCall = new RemonCall();
                     remonCall.setContext(CallActivity.this);
                     setCallback();
@@ -94,10 +94,13 @@ public class CallActivity extends AppCompatActivity {
             } else {
                 remonCall = RemonCall.builder()
                         .context(CallActivity.this)
+                        .audioType("music")
                         .localView(surfRendererLocal)
                         .remoteView(surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
+                        .restUrl(remonApplication.getConfig().restHost)
+                        .wssUrl(remonApplication.getConfig().socketUrl)
                         .build();
                 setCallback();
                 remonCall.connect(connectChId);
@@ -114,7 +117,7 @@ public class CallActivity extends AppCompatActivity {
 
     private void setCallback() {
         remonCall.onInit(() -> addLog("onInit"));
-        remonCall.onConnect((String id) -> addLog("onCreate : " + id));
+        remonCall.onConnect((String id) -> addLog("onConnect : " + id));
         remonCall.onComplete(() -> addLog("onComplete"));
         remonCall.onClose(() -> addLog("onClose"));
         remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString()));

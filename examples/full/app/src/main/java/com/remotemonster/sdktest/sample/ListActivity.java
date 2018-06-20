@@ -229,5 +229,10 @@ public class ListActivity extends AppCompatActivity {
         super.onResume();
         getChannelList();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
 

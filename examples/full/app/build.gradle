@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 25
@@ -51,7 +50,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     /* Remote monster WebRTC library */
-    compile 'com.remotemonster:sdk:2.0.16'
+    compile 'com.remotemonster:sdk:2.0.18'
 
     compile 'com.github.mmin18:realtimeblurview:1.1.0'
     compile 'com.android.support:design:25.3.1'
@@ -60,7 +59,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.16.18'
 
     /* Butter knife */
-    compile 'com.jakewharton:butterknife:8.4.0'
+    implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     /**

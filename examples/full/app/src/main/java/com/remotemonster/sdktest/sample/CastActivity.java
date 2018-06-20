@@ -1,9 +1,11 @@
 package com.remotemonster.sdktest.sample;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -41,7 +43,6 @@ public class CastActivity extends AppCompatActivity {
     Button btnViewCast;
     @BindView(R.id.rlRemoteView)
     RelativeLayout rlRemoteView;
-
 
 
     private RemonApplication remonApplication;
@@ -104,6 +105,9 @@ public class CastActivity extends AppCompatActivity {
                 setCallback(true);
                 castViewer.join(connectChId);
             }
+
+            btnStatReport.setVisibility(View.GONE);
+            btnViewCast.setVisibility(View.GONE);
         }
 
 
