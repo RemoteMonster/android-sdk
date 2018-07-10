@@ -16,24 +16,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.remon.sdktest.R;
 import com.remotemonster.sdk.RemonCall;
 import com.remotemonster.sdk.RemonCast;
 import com.remotemonster.sdk.data.Room;
-import com.remon.sdktest.R;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by lucas on 2018. 5. 16..
  */
 
 public class ListActivity extends AppCompatActivity {
-    @BindView(R.id.lvChannel)
     ListView lvChannel;
-    @BindView(R.id.btnCreate)
     Button btnCreate;
 
     private RoomAdapter mAdapter;
@@ -46,7 +41,9 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        ButterKnife.bind(this);
+
+        lvChannel = (ListView) findViewById(R.id.lvChannel);
+        btnCreate = (Button) findViewById(R.id.btnCreate);
 
         remonApplication = (RemonApplication) getApplicationContext();
 
@@ -155,7 +152,11 @@ public class ListActivity extends AppCompatActivity {
                 LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = layoutInflater.inflate(R.layout.list_item_channel, null);
 
-                channelItemViewHolder = new ChannelItemViewHolder(convertView);
+                channelItemViewHolder = new ChannelItemViewHolder();
+                channelItemViewHolder.tvRoomInfo = (TextView) convertView.findViewById(R.id.tvRoomInfo);
+                channelItemViewHolder.tvStatus = (TextView) convertView.findViewById(R.id.tvStatus);
+                channelItemViewHolder.imvSetConfig = (ImageView) convertView.findViewById(R.id.imvSetConfig);
+
                 convertView.setTag(channelItemViewHolder);
             } else {
                 channelItemViewHolder = (ChannelItemViewHolder) convertView.getTag();
@@ -204,17 +205,10 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-    static class ChannelItemViewHolder {
-        @BindView(R.id.tvRoomInfo)
+    public class ChannelItemViewHolder {
         TextView tvRoomInfo;
-        @BindView(R.id.tvStatus)
         TextView tvStatus;
-        @BindView(R.id.imvSetConfig)
         ImageView imvSetConfig;
-
-        public ChannelItemViewHolder(View view) {
-            ButterKnife.bind(this, view);
-        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.remotemonster.sdktest.sample;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -12,36 +11,22 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.remon.sdktest.R;
 import com.remotemonster.sdk.Config;
 import com.remotemonster.sdk.PercentFrameLayout;
 import com.remotemonster.sdk.RemonCast;
-import com.remon.sdktest.R;
-
 import com.remotemonster.sdk.core.SurfaceViewRenderer;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class CastActivity extends AppCompatActivity {
-    @BindView(R.id.btnRemonCastClose)
     Button btnRemonCastClose;
-    @BindView(R.id.tvLog)
     TextView tvLog;
-    @BindView(R.id.scvLog)
     ScrollView scvLog;
-    @BindView(R.id.surfRendererLocal)
     SurfaceViewRenderer surfRendererLocal;
-    @BindView(R.id.perFrameLocal)
     PercentFrameLayout perFrameLocal;
-    @BindView(R.id.surfRendererRemote)
     SurfaceViewRenderer surfRendererRemote;
-    @BindView(R.id.perFrameRemote)
     PercentFrameLayout perFrameRemote;
-    @BindView(R.id.btnStatReport)
     Button btnStatReport;
-    @BindView(R.id.btnViewCast)
     Button btnViewCast;
-    @BindView(R.id.rlRemoteView)
     RelativeLayout rlRemoteView;
 
 
@@ -55,10 +40,19 @@ public class CastActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cast);
-        ButterKnife.bind(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         remonApplication = (RemonApplication) getApplicationContext();
 
+        btnRemonCastClose = (Button) findViewById(R.id.btnRemonCastClose);
+        tvLog = (TextView) findViewById(R.id.tvLog);
+        scvLog = (ScrollView) findViewById(R.id.scvLog);
+        surfRendererLocal = (SurfaceViewRenderer) findViewById(R.id.surfRendererLocal);
+        perFrameLocal = (PercentFrameLayout) findViewById(R.id.perFrameLocal);
+        surfRendererRemote = (SurfaceViewRenderer) findViewById(R.id.surfRendererRemote);
+        perFrameRemote = (PercentFrameLayout) findViewById(R.id.perFrameRemote);
+        btnStatReport = (Button) findViewById(R.id.btnStatReport);
+        btnViewCast = (Button) findViewById(R.id.btnViewCast);
+        rlRemoteView = (RelativeLayout) findViewById(R.id.rlRemoteView);
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isCreate", false)) {
@@ -164,6 +158,7 @@ public class CastActivity extends AppCompatActivity {
 
 
     private String mPriorLog = "";
+
     private void addLog(String log) {
         mPriorLog = mPriorLog + log + "\n";
         runOnUiThread(() -> {

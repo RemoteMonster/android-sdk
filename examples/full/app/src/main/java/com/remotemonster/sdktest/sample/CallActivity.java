@@ -16,33 +16,20 @@ import com.remotemonster.sdk.PercentFrameLayout;
 import com.remotemonster.sdk.RemonCall;
 import com.remotemonster.sdk.core.SurfaceViewRenderer;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by lucas on 2018. 4. 26..
  */
 
 public class CallActivity extends AppCompatActivity {
-    @BindView(R.id.btnRemonFactoryClose)
     Button btnRemonFactoryClose;
-    @BindView(R.id.tvLog)
     TextView tvLog;
-    @BindView(R.id.surfRendererLocal)
     SurfaceViewRenderer surfRendererLocal;
-    @BindView(R.id.perFrameLocal)
     PercentFrameLayout perFrameLocal;
-    @BindView(R.id.surfRendererRemote)
     SurfaceViewRenderer surfRendererRemote;
-    @BindView(R.id.perFrameRemote)
     PercentFrameLayout perFrameRemote;
-    @BindView(R.id.scvLog)
     ScrollView scvLog;
-    @BindView(R.id.btnStatReport)
     Button btnStatReport;
-    @BindView(R.id.rlRemoteView)
     RelativeLayout rlRemoteView;
-
 
     private RemonCall remonCall;
     private Config mConfig;
@@ -53,9 +40,18 @@ public class CallActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
-        ButterKnife.bind(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         remonApplication = (RemonApplication) getApplicationContext();
+
+        btnRemonFactoryClose = (Button) findViewById(R.id.btnRemonFactoryClose);
+        tvLog = (TextView) findViewById(R.id.tvLog);
+        surfRendererLocal = (SurfaceViewRenderer) findViewById(R.id.surfRendererLocal);
+        perFrameLocal = (PercentFrameLayout) findViewById(R.id.perFrameLocal);
+        surfRendererRemote = (SurfaceViewRenderer) findViewById(R.id.surfRendererRemote);
+        perFrameRemote = (PercentFrameLayout) findViewById(R.id.perFrameRemote);
+        scvLog = (ScrollView) findViewById(R.id.scvLog);
+        btnStatReport = (Button) findViewById(R.id.btnStatReport);
+        rlRemoteView = (RelativeLayout) findViewById(R.id.rlRemoteView);
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isCreate", false)) {
@@ -114,6 +110,7 @@ public class CallActivity extends AppCompatActivity {
 
         btnStatReport.setOnClickListener(v -> remonCall.enableStatView(true, rlRemoteView));
     }
+
 
     private void setCallback() {
         remonCall.onInit(() -> addLog("onInit"));

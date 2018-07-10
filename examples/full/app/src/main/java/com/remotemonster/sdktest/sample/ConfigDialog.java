@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -20,41 +19,24 @@ import android.widget.Toast;
 
 import com.remon.sdktest.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by lucas on 2018. 5. 11..
  */
 
 public class ConfigDialog extends Dialog {
-    @BindView(R.id.llVideoWidth)
     LinearLayout llVideoWidth;
-    @BindView(R.id.llVideoHeight)
     LinearLayout llVideoHeight;
-    @BindView(R.id.llVideoFps)
     LinearLayout llVideoFps;
-    @BindView(R.id.llfirstVideoBitrate)
     LinearLayout llfirstVideoBitrate;
-    @BindView(R.id.btnOk)
     Button btnOk;
-    @BindView(R.id.etChannelName)
     EditText etChannelName;
-    @BindView(R.id.llChannelName)
     LinearLayout llChannelName;
-    @BindView(R.id.spNatCodec)
     Spinner spNatCodec;
-    @BindView(R.id.tvVideoWidth)
     TextView tvVideoWidth;
-    @BindView(R.id.tvVideoHeight)
     TextView tvVideoHeight;
-    @BindView(R.id.tvVideoFps)
     TextView tvVideoFps;
-    @BindView(R.id.tvFirstVideoBitrate)
     TextView tvFirstVideoBitrate;
-    @BindView(R.id.cbEnableVideoCall)
     CheckBox cbEnableVideoCall;
-    @BindView(R.id.llEnableVideoCall)
     LinearLayout llEnableVideoCall;
 
     private Activity activity;
@@ -67,8 +49,25 @@ public class ConfigDialog extends Dialog {
         this.activity = activity;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_set_config);
-        ButterKnife.bind(this);
         setCanceledOnTouchOutside(false);
+
+
+        llVideoWidth = (LinearLayout) findViewById(R.id.llVideoWidth);
+        llVideoHeight = (LinearLayout) findViewById(R.id.llVideoHeight);
+        llVideoFps = (LinearLayout) findViewById(R.id.llVideoFps);
+        llfirstVideoBitrate = (LinearLayout) findViewById(R.id.llfirstVideoBitrate);
+        btnOk = (Button) findViewById(R.id.btnOk);
+        etChannelName = (EditText) findViewById(R.id.etChannelName);
+        llChannelName = (LinearLayout) findViewById(R.id.llChannelName);
+        spNatCodec = (Spinner) findViewById(R.id.spNatCodec);
+        tvVideoWidth = (TextView) findViewById(R.id.tvVideoWidth);
+        tvVideoHeight = (TextView) findViewById(R.id.tvVideoHeight);
+        tvVideoFps = (TextView) findViewById(R.id.tvVideoFps);
+        tvFirstVideoBitrate = (TextView) findViewById(R.id.tvFirstVideoBitrate);
+        cbEnableVideoCall = (CheckBox) findViewById(R.id.cbEnableVideoCall);
+        llEnableVideoCall = (LinearLayout) findViewById(R.id.llEnableVideoCall);
+
+
         remonApplication = (RemonApplication) activity.getApplicationContext();
 
         if (isCreate) {
@@ -112,7 +111,7 @@ public class ConfigDialog extends Dialog {
         llVideoWidth.setOnClickListener(v -> {
             NumSetDialog numSetDialog = new NumSetDialog(activity, "Video Width?", num -> {
                 remonApplication.getConfig().setVideoWidth(num);
-                tvVideoWidth.setText(num+"");
+                tvVideoWidth.setText(num + "");
                 closeSoftKey();
             });
             numSetDialog.show();
@@ -121,7 +120,7 @@ public class ConfigDialog extends Dialog {
         llVideoHeight.setOnClickListener(v -> {
             NumSetDialog numSetDialog = new NumSetDialog(activity, "Video Height?", num -> {
                 remonApplication.getConfig().setVideoHeight(num);
-                tvVideoHeight.setText(num+"");
+                tvVideoHeight.setText(num + "");
                 closeSoftKey();
             });
             numSetDialog.show();
@@ -131,7 +130,7 @@ public class ConfigDialog extends Dialog {
         llVideoFps.setOnClickListener(v -> {
             NumSetDialog numSetDialog = new NumSetDialog(activity, "Video Fps?", num -> {
                 remonApplication.getConfig().setVideoFps(num);
-                tvVideoFps.setText(num+"");
+                tvVideoFps.setText(num + "");
                 closeSoftKey();
             });
             numSetDialog.show();
@@ -141,7 +140,7 @@ public class ConfigDialog extends Dialog {
         llfirstVideoBitrate.setOnClickListener(v -> {
             NumSetDialog numSetDialog = new NumSetDialog(activity, "First Video Bitrate?", num -> {
                 remonApplication.getConfig().setStartVideoBitrate(num);
-                tvFirstVideoBitrate.setText(num+"");
+                tvFirstVideoBitrate.setText(num + "");
                 closeSoftKey();
             });
             numSetDialog.show();
@@ -159,7 +158,7 @@ public class ConfigDialog extends Dialog {
     private void closeSoftKey() {
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }

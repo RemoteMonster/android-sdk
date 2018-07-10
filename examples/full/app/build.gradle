@@ -52,17 +52,11 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     /* Remote monster WebRTC library */
-    compile 'com.remotemonster:sdk:2.0.18'
+    compile 'com.remotemonster:sdk:2.0.20'
 
     compile 'com.github.mmin18:realtimeblurview:1.1.0'
     compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
-    compile 'org.projectlombok:lombok:1.16.18'
-    annotationProcessor 'org.projectlombok:lombok:1.16.18'
-
-    /* Butter knife */
-    implementation 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     /**
      *  MultiDex Libarary

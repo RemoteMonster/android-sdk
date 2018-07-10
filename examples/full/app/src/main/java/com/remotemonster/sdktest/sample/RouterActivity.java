@@ -5,13 +5,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 
 import com.remon.sdktest.R;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class RouterActivity extends AppCompatActivity {
     public static final String[] MANDATORY_PERMISSIONS = {
@@ -27,19 +23,19 @@ public class RouterActivity extends AppCompatActivity {
             "android.permission.BLUETOOTH_ADMIN",
             "android.permission.WRITE_EXTERNAL_STORAGE"
     };
-    @BindView(R.id.btnRemonCast)
     Button btnRemonCast;
-    @BindView(R.id.btnRemonCall)
     Button btnRemonCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_router);
-        ButterKnife.bind(this);
         if (Build.VERSION.SDK_INT >= 23) {
             checkPermission(MANDATORY_PERMISSIONS);
         }
+
+        btnRemonCast = (Button) findViewById(R.id.btnRemonCast);
+        btnRemonCall = (Button) findViewById(R.id.btnRemonCall);
 
 
         btnRemonCall.setOnClickListener(v -> {

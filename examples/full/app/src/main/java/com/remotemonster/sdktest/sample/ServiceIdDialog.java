@@ -8,19 +8,13 @@ import android.widget.EditText;
 
 import com.remon.sdktest.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by lucas on 2018. 5. 16..
  */
 
 public class ServiceIdDialog extends Dialog {
-    @BindView(R.id.etServiceId)
     EditText etServiceId;
-    @BindView(R.id.etKey)
     EditText etKey;
-    @BindView(R.id.btnOk)
     Button btnOk;
 
     private RemonApplication remonApplication;
@@ -28,7 +22,11 @@ public class ServiceIdDialog extends Dialog {
     public ServiceIdDialog(@NonNull Activity activity) {
         super(activity);
         setContentView(R.layout.dialog_set_seviceid);
-        ButterKnife.bind(this);
+
+        etServiceId = (EditText) findViewById(R.id.etServiceId);
+        etKey = (EditText) findViewById(R.id.etKey);
+        btnOk = (Button) findViewById(R.id.btnOk);
+
         remonApplication = (RemonApplication) activity.getApplicationContext();
 
         etKey.setText(remonApplication.getConfig().getKey());

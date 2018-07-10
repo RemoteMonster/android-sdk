@@ -2,21 +2,16 @@ package com.remotemonster.sdktest.sample;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.remotemonster.sdk.Config;
 
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Created by lucas on 2018. 5. 16..
  */
 
-@Getter
-@Setter
 public class RemonApplication extends Application {
     private Config config;
     public static final String REST_HOST = "https://signal.remotemonster.com/rest/";
@@ -45,6 +40,16 @@ public class RemonApplication extends Application {
         config.setKey("1234567890");
         config.setServiceId("SERVICEID1");
     }
+
+    public Config getConfig() {
+        return config;
+    }
+
+    public void setConfig(Config config) {
+        this.config = config;
+    }
+
+
 
     @Override
     protected void attachBaseContext(Context base) {
