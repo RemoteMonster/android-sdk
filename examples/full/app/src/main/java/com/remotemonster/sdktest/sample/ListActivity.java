@@ -22,6 +22,7 @@ import com.remotemonster.sdk.RemonCast;
 import com.remotemonster.sdk.data.Room;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by lucas on 2018. 5. 16..
@@ -70,6 +71,8 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void getChannelList() {
+
+
         mRoomList.clear();
         if (remonType == 0 || remonType == 3) {
             /* type = 0 통신일 경우 */

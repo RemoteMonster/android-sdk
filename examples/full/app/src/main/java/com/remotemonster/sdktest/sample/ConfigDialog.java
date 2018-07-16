@@ -106,6 +106,10 @@ public class ConfigDialog extends Dialog {
                     case 2:
                         remonApplication.getConfig().setVideoCodec("H264");
                         break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> a6b8eb8... chore(editURL): edit url, change codec
                 }
             }
 

@@ -182,7 +182,6 @@ public class CastActivity extends AppCompatActivity {
                 addLog("onComplete");
                 this.isCastView = isCastView;
             });
-            castViewer.onJoin(() -> addLog("onJoin"));
             castViewer.onJoin(() -> {
                 addLog("onJoin");
                 runOnUiThread(() -> surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL));
