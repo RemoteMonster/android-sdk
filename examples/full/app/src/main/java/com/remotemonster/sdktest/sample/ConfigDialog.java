@@ -97,7 +97,20 @@ public class ConfigDialog extends Dialog {
         spNatCodec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        remonApplication.getConfig().setVideoCodec("VP8");
+                        break;
 
+                    case 1:
+                        remonApplication.getConfig().setVideoCodec("VP9");
+                        break;
+
+                    case 2:
+                        remonApplication.getConfig().setVideoCodec("H264");
+                        break;
+
+                }
             }
 
             @Override
