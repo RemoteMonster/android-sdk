@@ -22,6 +22,7 @@ import com.remotemonster.sdk.data.Room;
 import com.remon.sdktest.R;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +74,8 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void getChannelList() {
+
+
         mRoomList.clear();
         if (remonType == 0) {
             /* type = 0 통신일 경우 */

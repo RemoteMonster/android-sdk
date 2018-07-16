@@ -19,9 +19,8 @@ import lombok.Setter;
 @Setter
 public class RemonApplication extends Application {
     private Config config;
-    public static final String REST_HOST = "https://matiz.remotemonster.com/rest/";
-    public static final String WSS_HOST = "wss://matiz.remotemonster.com/ws";
-//    public static final String WS_HOST = "ws://signal.remotemonster.com:8081/ws";
+    public static final String REST_HOST = "https://signal.remotemonster.com/rest/";
+    public static final String WSS_HOST = "wss://signal.remotemonster.com/ws";
 
     @Override
     public void onCreate() {

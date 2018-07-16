@@ -23,6 +23,8 @@ android {
     }
     packagingOptions {
         exclude '/META-INF/LICENSE'
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
     }
     buildTypes {
         release {
