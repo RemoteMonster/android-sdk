@@ -30,13 +30,13 @@ public class RouterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_router);
-        if (Build.VERSION.SDK_INT >= 23) {
-            checkPermission(MANDATORY_PERMISSIONS);
-        }
 
         btnRemonCast = (Button) findViewById(R.id.btnRemonCast);
         btnRemonCall = (Button) findViewById(R.id.btnRemonCall);
 
+        if (Build.VERSION.SDK_INT >= 23) {
+            checkPermission(MANDATORY_PERMISSIONS);
+        }
 
         btnRemonCall.setOnClickListener(v -> {
             Intent intent = new Intent(RouterActivity.this, ListActivity.class);

@@ -31,6 +31,11 @@
         <item>H264</item>
     </string-array>
 
+    <string-array name="audioType">
+        <item>Voice</item>
+        <item>Music</item>
+    </string-array>
+
     <string-array name="audioCodecs">
         <item>OPUS</item>
         <item>ISAC</item>

@@ -30,11 +30,11 @@ public class CallActivity extends AppCompatActivity {
     ScrollView scvLog;
     Button btnStatReport;
     RelativeLayout rlRemoteView;
-
+    Button btnSpeakerOnOff;
     private RemonCall remonCall;
-    private Config mConfig;
     private String connectChId;
     private RemonApplication remonApplication;
+    private boolean isSpeakerOn = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class CallActivity extends AppCompatActivity {
         scvLog = (ScrollView) findViewById(R.id.scvLog);
         btnStatReport = (Button) findViewById(R.id.btnStatReport);
         rlRemoteView = (RelativeLayout) findViewById(R.id.rlRemoteView);
+        btnSpeakerOnOff = (Button) findViewById(R.id.btnSpeakerOnOff);
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isCreate", false)) {
@@ -62,10 +63,10 @@ public class CallActivity extends AppCompatActivity {
                 config.setRemoteView(surfRendererRemote);
                 config.setRestHost(remonApplication.getConfig().restHost);
                 config.setSocketUrl(remonApplication.getConfig().socketUrl);
+                config.setActivity(CallActivity.this);
                 connectChId = chid;
 
                 remonCall = new RemonCall();
-                remonCall.setContext(CallActivity.this);
                 setCallback();
                 remonCall.connect(connectChId, config);
             });
@@ -80,8 +81,8 @@ public class CallActivity extends AppCompatActivity {
                     config.setRemoteView(surfRendererRemote);
                     config.setRestHost(remonApplication.getConfig().restHost);
                     config.setSocketUrl(remonApplication.getConfig().socketUrl);
+                    config.setActivity(CallActivity.this);
                     remonCall = new RemonCall();
-                    remonCall.setContext(CallActivity.this);
                     setCallback();
                     remonCall.connect(connectChId, config);
 
@@ -90,7 +91,6 @@ public class CallActivity extends AppCompatActivity {
             } else {
                 remonCall = RemonCall.builder()
                         .context(CallActivity.this)
-                        .audioType("music")
                         .localView(surfRendererLocal)
                         .remoteView(surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
@@ -103,6 +103,17 @@ public class CallActivity extends AppCompatActivity {
             }
         }
 
+        btnSpeakerOnOff.setOnClickListener(view -> remonCall.setSpeakerphoneOn(true));
+        btnSpeakerOnOff.setOnClickListener(view -> {
+            if (remonCall != null) {
+                isSpeakerOn = isSpeakerOn ? (isSpeakerOn = false) : (isSpeakerOn = true);
+                remonCall.setSpeakerphoneOn(isSpeakerOn);
+
+                remonCall.sendMessage("test msg");
+            }
+        });
+
+
         btnRemonFactoryClose.setOnClickListener(v -> {
             addLog("Start close");
             remonCall.close();
@@ -111,13 +122,14 @@ public class CallActivity extends AppCompatActivity {
         btnStatReport.setOnClickListener(v -> remonCall.enableStatView(true, rlRemoteView));
     }
 
-
     private void setCallback() {
-        remonCall.onInit(() -> addLog("onInit"));
+        remonCall.onInit(() -> {
+            addLog("onInit"); });
+        remonCall.onMessage(msg -> addLog(msg));
         remonCall.onConnect((String id) -> addLog("onConnect : " + id));
         remonCall.onComplete(() -> addLog("onComplete"));
         remonCall.onClose(() -> addLog("onClose"));
-        remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
+        remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString() + " / " + e.getDescription()));
         remonCall.onStat(report -> addLog("Print report"));
     }
 

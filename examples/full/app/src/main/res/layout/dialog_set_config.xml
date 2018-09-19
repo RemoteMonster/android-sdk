@@ -33,7 +33,6 @@
             android:layout_weight="1"
             android:id="@+id/etChannelName"
             android:layout_marginLeft="10dp"
-            android:inputType="textCapSentences"
             android:paddingLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -52,16 +51,24 @@
             android:paddingRight="20dp"
             android:orientation="vertical">
 
+            <!--<com.remotemonster.sdk.core.SimulcastSpinner-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:gravity="right|center_vertical"/>-->
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingRight="-20dp"
                 android:paddingLeft="10dp">
                 <Spinner
-                    android:id="@+id/spNatCodec"
+                    android:id="@+id/spVideoCodec"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:gravity="right|center_vertical"
+                    android:entries="@array/videoCodecs"
                     android:layout_width="130dp"
                     android:layout_height="match_parent"/>
                 <TextView
@@ -70,6 +77,31 @@
                     android:layout_centerVertical="true"
                     android:textSize="18sp"
                     android:text="Video Codec"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingRight="-20dp"
+                android:paddingLeft="10dp">
+                <Spinner
+                    android:id="@+id/spAudioCodec"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:entries="@array/audioCodecs"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="18sp"
+                    android:text="Audio Codec"/>
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"
@@ -178,7 +210,6 @@
 
             <!-- First Video Bitrate -->
             <LinearLayout
-                android:id="@+id/llEnableVideoCall"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="10dp"
@@ -196,6 +227,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingRight="-20dp"
+                android:paddingLeft="10dp">
+                <Spinner
+                    android:id="@+id/spAudioType"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:entries="@array/audioType"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="18sp"
+                    android:text="Audio Type"/>
+            </RelativeLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

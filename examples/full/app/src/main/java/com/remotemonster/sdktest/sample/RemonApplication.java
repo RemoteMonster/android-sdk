@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.remotemonster.sdk.Config;
 
-
 /**
  * Created by lucas on 2018. 5. 16..
  */
@@ -20,13 +19,12 @@ public class RemonApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         initConfig();
     }
 
     private void initConfig() {
         config = new Config();
-        config.setVideoCodec("H264");
+        config.setVideoCodec("VP8");
         config.setRestHost(REST_HOST);
         config.setSocketUrl(WSS_HOST);
         config.setVideoWidth(640);
@@ -48,8 +46,6 @@ public class RemonApplication extends Application {
     public void setConfig(Config config) {
         this.config = config;
     }
-
-
 
     @Override
     protected void attachBaseContext(Context base) {

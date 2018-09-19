@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.remon.sdktest.R;
+import com.remotemonster.sdk.data.AudioType;
 
 /**
  * Created by lucas on 2018. 5. 11..
@@ -31,13 +31,14 @@ public class ConfigDialog extends Dialog {
     Button btnOk;
     EditText etChannelName;
     LinearLayout llChannelName;
-    Spinner spNatCodec;
+    Spinner spVideoCodec;
     TextView tvVideoWidth;
     TextView tvVideoHeight;
     TextView tvVideoFps;
     TextView tvFirstVideoBitrate;
     CheckBox cbEnableVideoCall;
-    LinearLayout llEnableVideoCall;
+    Spinner spAudioType;
+    Spinner spAudioCodec;
 
     private Activity activity;
     private RemonApplication remonApplication;
@@ -49,8 +50,6 @@ public class ConfigDialog extends Dialog {
         this.activity = activity;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_set_config);
-        setCanceledOnTouchOutside(false);
-
 
         llVideoWidth = (LinearLayout) findViewById(R.id.llVideoWidth);
         llVideoHeight = (LinearLayout) findViewById(R.id.llVideoHeight);
@@ -59,15 +58,16 @@ public class ConfigDialog extends Dialog {
         btnOk = (Button) findViewById(R.id.btnOk);
         etChannelName = (EditText) findViewById(R.id.etChannelName);
         llChannelName = (LinearLayout) findViewById(R.id.llChannelName);
-        spNatCodec = (Spinner) findViewById(R.id.spNatCodec);
+        spVideoCodec = (Spinner) findViewById(R.id.spVideoCodec);
         tvVideoWidth = (TextView) findViewById(R.id.tvVideoWidth);
         tvVideoHeight = (TextView) findViewById(R.id.tvVideoHeight);
         tvVideoFps = (TextView) findViewById(R.id.tvVideoFps);
         tvFirstVideoBitrate = (TextView) findViewById(R.id.tvFirstVideoBitrate);
         cbEnableVideoCall = (CheckBox) findViewById(R.id.cbEnableVideoCall);
-        llEnableVideoCall = (LinearLayout) findViewById(R.id.llEnableVideoCall);
+        spAudioType = (Spinner) findViewById(R.id.spAudioType);
+        spAudioCodec = (Spinner) findViewById(R.id.spAudioCodec);
 
-
+        setCanceledOnTouchOutside(false);
         remonApplication = (RemonApplication) activity.getApplicationContext();
 
         if (isCreate) {
@@ -91,10 +91,7 @@ public class ConfigDialog extends Dialog {
         });
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, R.array.videoCodecs, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spNatCodec.setAdapter(adapter);
-        spNatCodec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spVideoCodec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
@@ -109,7 +106,6 @@ public class ConfigDialog extends Dialog {
                     case 2:
                         remonApplication.getConfig().setVideoCodec("H264");
                         break;
-
                 }
             }
 
@@ -118,8 +114,28 @@ public class ConfigDialog extends Dialog {
 
             }
         });
-        spNatCodec.setSelection(2);
+        spVideoCodec.setSelection(2);
 
+        spAudioCodec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        remonApplication.getConfig().setAudioCodec("OPUS");
+                        break;
+
+                    case 1:
+                        remonApplication.getConfig().setVideoCodec("ISAC");
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spAudioCodec.setSelection(0);
 
         llVideoWidth.setOnClickListener(v -> {
             NumSetDialog numSetDialog = new NumSetDialog(activity, "Video Width?", num -> {
@@ -166,6 +182,33 @@ public class ConfigDialog extends Dialog {
                 remonApplication.getConfig().setVideoCall(false);
             }
         });
+
+        spAudioType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position) {
+                    case 0:
+                        remonApplication.getConfig().setAudioType(AudioType.VOICE);
+                        break;
+
+                    case 1:
+                        remonApplication.getConfig().setAudioType(AudioType.MUSIC);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        if (activity instanceof CallActivity) {
+            spAudioType.setSelection(0);
+        } else {
+            spAudioType.setSelection(1);
+        }
+
+
     }
 
     private void closeSoftKey() {

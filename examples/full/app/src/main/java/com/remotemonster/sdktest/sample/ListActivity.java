@@ -22,7 +22,6 @@ import com.remotemonster.sdk.RemonCast;
 import com.remotemonster.sdk.data.Room;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by lucas on 2018. 5. 16..
@@ -61,7 +60,7 @@ public class ListActivity extends AppCompatActivity {
                 Intent intentCreate = new Intent(ListActivity.this, CallActivity.class);
                 intentCreate.putExtra("isCreate", true);
                 startActivity(intentCreate);
-            } else if (remonType == 1){
+            } else if (remonType == 1) {
                 remonCast.close();
                 Intent intentCreate = new Intent(ListActivity.this, CastActivity.class);
                 intentCreate.putExtra("isCreate", true);
@@ -71,10 +70,8 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void getChannelList() {
-
-
         mRoomList.clear();
-        if (remonType == 0) {
+        if (remonType == 0 || remonType == 3) {
             /* type = 0 통신일 경우 */
             remonCall = RemonCall.builder()
                     .context(ListActivity.this)
@@ -82,6 +79,8 @@ public class ListActivity extends AppCompatActivity {
                     .key(remonApplication.getConfig().getKey())
                     .restUrl(remonApplication.getConfig().restHost)
                     .wssUrl(remonApplication.getConfig().socketUrl)
+                    .saveInputAudioToFile(true)
+                    .aecDumpFilePath("Download/aec_dump")
                     .build();
             remonCall.onInit(() -> remonCall.fetchCalls());
             remonCall.onFetch(rooms -> {
@@ -159,7 +158,6 @@ public class ListActivity extends AppCompatActivity {
                 channelItemViewHolder.tvRoomInfo = (TextView) convertView.findViewById(R.id.tvRoomInfo);
                 channelItemViewHolder.tvStatus = (TextView) convertView.findViewById(R.id.tvStatus);
                 channelItemViewHolder.imvSetConfig = (ImageView) convertView.findViewById(R.id.imvSetConfig);
-
                 convertView.setTag(channelItemViewHolder);
             } else {
                 channelItemViewHolder = (ChannelItemViewHolder) convertView.getTag();
@@ -182,7 +180,6 @@ public class ListActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
             channelItemViewHolder.imvSetConfig.setOnClickListener(v -> {
                 if (!mRoomList.get(position).getStatus().equals("COMPLETE")) {
                     if (remonType == 0) {
@@ -192,7 +189,7 @@ public class ListActivity extends AppCompatActivity {
                         intent.putExtra("setConfig", true);
                         intent.putExtra("chid", mRoomList.get(position).getId());
                         startActivity(intent);
-                    } else if(remonType == 1){
+                    } else if (remonType == 1) {
                         remonCast.close();
                         Intent intent = new Intent(ListActivity.this, CastActivity.class);
                         intent.putExtra("isCreate", false);
@@ -202,7 +199,6 @@ public class ListActivity extends AppCompatActivity {
                     }
                 }
             });
-
             return convertView;
         }
 
@@ -225,11 +221,6 @@ public class ListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getChannelList();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }
 

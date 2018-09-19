@@ -32,6 +32,15 @@
                 android:background="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnSpeakerOnOff"
+                android:textColor="@android:color/white"
+                android:text="speakerphon On/Off"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
