@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ @author    Lucas Choi <sw.maker.dm@gmail.com>
-  ~ Copyright (c) 2017 RemoteMonster, inc. All Right Reserved.
-  ~
-  -->
-
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    tools:context="com.remotemonster.remonvideochat.CallActivity">
 
     <include
         layout="@layout/app_bar_main"

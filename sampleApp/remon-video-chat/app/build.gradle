@@ -32,6 +32,8 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -45,11 +47,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    /* Butter knife */
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
     /* Kotlin */
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     /* Remote monster WebRTC library */
-    compile(group: 'com.remon', name: 'remondroid', version: '0.2.69')
+    compile 'com.remotemonster:sdk:2.1.2'
 
     /* permission*/
     compile 'io.vrinda.kotlinpermissions:kotlinpermissions:1.1'
