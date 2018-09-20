@@ -16,6 +16,8 @@ import com.remotemonster.sdk.PercentFrameLayout;
 import com.remotemonster.sdk.RemonCall;
 import com.remotemonster.sdk.core.SurfaceViewRenderer;
 
+import org.webrtc.RendererCommon;
+
 /**
  * Created by lucas on 2018. 4. 26..
  */
@@ -108,8 +110,6 @@ public class CallActivity extends AppCompatActivity {
             if (remonCall != null) {
                 isSpeakerOn = isSpeakerOn ? (isSpeakerOn = false) : (isSpeakerOn = true);
                 remonCall.setSpeakerphoneOn(isSpeakerOn);
-
-                remonCall.sendMessage("test msg");
             }
         });
 
@@ -127,7 +127,10 @@ public class CallActivity extends AppCompatActivity {
             addLog("onInit"); });
         remonCall.onMessage(msg -> addLog(msg));
         remonCall.onConnect((String id) -> addLog("onConnect : " + id));
-        remonCall.onComplete(() -> addLog("onComplete"));
+        remonCall.onComplete(() -> runOnUiThread(() -> {
+            surfRendererLocal.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
+            surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
+        }));
         remonCall.onClose(() -> addLog("onClose"));
         remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString() + " / " + e.getDescription()));
         remonCall.onStat(report -> addLog("Print report"));

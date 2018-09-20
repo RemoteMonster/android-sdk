@@ -79,11 +79,10 @@ public class ListActivity extends AppCompatActivity {
                     .key(remonApplication.getConfig().getKey())
                     .restUrl(remonApplication.getConfig().restHost)
                     .wssUrl(remonApplication.getConfig().socketUrl)
-                    .saveInputAudioToFile(true)
-                    .aecDumpFilePath("Download/aec_dump")
                     .build();
             remonCall.onInit(() -> remonCall.fetchCalls());
             remonCall.onFetch(rooms -> {
+                mRoomList.clear();
                 for (Room room : rooms) {
                     mRoomList.add(room);
                 }
@@ -100,6 +99,7 @@ public class ListActivity extends AppCompatActivity {
                     .build();
             remonCast.onInit(() -> remonCast.fetchCasts());
             remonCast.onFetch(rooms -> {
+                mRoomList.clear();
                 for (Room room : rooms) {
                     mRoomList.add(room);
                 }
@@ -162,7 +162,6 @@ public class ListActivity extends AppCompatActivity {
             } else {
                 channelItemViewHolder = (ChannelItemViewHolder) convertView.getTag();
             }
-
             channelItemViewHolder.tvRoomInfo.setText(mRoomList.get(position).getId());
             channelItemViewHolder.tvStatus.setText(mRoomList.get(position).getStatus());
             channelItemViewHolder.tvRoomInfo.setOnClickListener(v -> {
