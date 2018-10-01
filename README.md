@@ -28,9 +28,8 @@ dependencies {
 
 * [source](https://github.com/RemoteMonster/android-sdk/tree/master/examples/full/)
 
-### Remon Video Chat `Kotlin`
+### Remon Video Chat `Java`
 
-* [source](https://github.com/RemoteMonster/android-sdk/tree/master/examples/remon-video-chat)
 * [playstore](https://play.google.com/store/apps/details?id=com.remotemonster.remonrtc)
 
 ## Documents
