@@ -2,6 +2,7 @@ package com.remotemonster.sdktest.sample;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.remon.sdktest.R;
+import com.remon.sdktest.databinding.ActivityListBinding;
+import com.remon.sdktest.databinding.ListItemChannelBinding;
 import com.remotemonster.sdk.RemonCall;
 import com.remotemonster.sdk.RemonCast;
 import com.remotemonster.sdk.data.Room;
@@ -29,22 +32,18 @@ import java.util.Iterator;
  */
 
 public class ListActivity extends AppCompatActivity {
-    ListView lvChannel;
-    Button btnCreate;
-
     private RoomAdapter mAdapter;
     private RemonCall remonCall;
     private RemonCast remonCast;
     private int remonType = 0;
     private RemonApplication remonApplication;
 
+    private ActivityListBinding mBinding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-
-        lvChannel = (ListView) findViewById(R.id.lvChannel);
-        btnCreate = (Button) findViewById(R.id.btnCreate);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_list);
 
         remonApplication = (RemonApplication) getApplicationContext();
 
@@ -53,9 +52,9 @@ public class ListActivity extends AppCompatActivity {
 
         mAdapter = new RoomAdapter();
         mRoomList = new ArrayList<>();
-        lvChannel.setAdapter(mAdapter);
+        mBinding.lvChannel.setAdapter(mAdapter);
 
-        btnCreate.setOnClickListener(v -> {
+        mBinding.btnCreate.setOnClickListener(v -> {
             if (remonType == 0) {
                 remonCall.close();
                 Intent intentCreate = new Intent(ListActivity.this, CallActivity.class);
@@ -152,22 +151,19 @@ public class ListActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ChannelItemViewHolder channelItemViewHolder = null;
+            ListItemChannelBinding binding;
             if (convertView == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = layoutInflater.inflate(R.layout.list_item_channel, null);
-
-                channelItemViewHolder = new ChannelItemViewHolder();
-                channelItemViewHolder.tvRoomInfo = (TextView) convertView.findViewById(R.id.tvRoomInfo);
-                channelItemViewHolder.tvStatus = (TextView) convertView.findViewById(R.id.tvStatus);
-                channelItemViewHolder.imvSetConfig = (ImageView) convertView.findViewById(R.id.imvSetConfig);
-                convertView.setTag(channelItemViewHolder);
+                binding = DataBindingUtil.bind(convertView);
+                convertView.setTag(binding);
             } else {
-                channelItemViewHolder = (ChannelItemViewHolder) convertView.getTag();
+                binding = (ListItemChannelBinding) convertView.getTag();
             }
-            channelItemViewHolder.tvRoomInfo.setText(mRoomList.get(position).getId());
-            channelItemViewHolder.tvStatus.setText(mRoomList.get(position).getStatus());
-            channelItemViewHolder.tvRoomInfo.setOnClickListener(v -> {
+
+            binding.tvRoomInfo.setText(mRoomList.get(position).getId());
+            binding.tvStatus.setText(mRoomList.get(position).getStatus());
+            binding.tvRoomInfo.setOnClickListener(v -> {
                 if (remonType == 0) {
                     remonCall.close();
                     Intent intent = new Intent(ListActivity.this, CallActivity.class);
@@ -182,7 +178,7 @@ public class ListActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            channelItemViewHolder.imvSetConfig.setOnClickListener(v -> {
+            binding.imvSetConfig.setOnClickListener(v -> {
                 if (!mRoomList.get(position).getStatus().equals("COMPLETE")) {
                     if (remonType == 0) {
                         remonCall.close();
@@ -201,15 +197,9 @@ public class ListActivity extends AppCompatActivity {
                     }
                 }
             });
-            return convertView;
+            return binding.getRoot();
         }
 
-    }
-
-    public class ChannelItemViewHolder {
-        TextView tvRoomInfo;
-        TextView tvStatus;
-        ImageView imvSetConfig;
     }
 
     @Override
@@ -217,7 +207,6 @@ public class ListActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         setIntent(intent);
     }
-
 
     @Override
     protected void onResume() {

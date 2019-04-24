@@ -1,133 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/btnRemonFactoryClose"
-                android:textColor="@android:color/white"
-                android:text="close"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryDark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnStatReport"
-                android:textColor="@android:color/white"
-                android:text="Stat Report"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryDark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnSpeakerOnOff"
-                android:textColor="@android:color/white"
-                android:text="speakerphon On/Off"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryDark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:background="@android:color/darker_gray"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Log"/>
-            <ScrollView
-                android:id="@+id/scvLog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tvLog"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"/>
-            </ScrollView>
-        </LinearLayout>
-    </LinearLayout>
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-
-        <RelativeLayout
-            android:layout_weight="1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.remotemonster.sdk.PercentFrameLayout
-                android:id="@+id/perFrameLocal"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <com.remotemonster.sdk.core.SurfaceViewRenderer
-                    android:id="@+id/surfRendererLocal"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/btnRemonFactoryClose"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </com.remotemonster.sdk.PercentFrameLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="close"
+                    android:textColor="@android:color/white"/>
 
-            <TextView
-                android:background="@android:color/darker_gray"
+                <Button
+                    android:id="@+id/btnStatReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Stat Report"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:id="@+id/btnSpeakerOnOff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="speakerphon On/Off"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Local"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center_horizontal"
+                    android:text="Log"/>
+                <ScrollView
+                    android:id="@+id/scvLog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvLog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"/>
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/fraglRemon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="1dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"/>
+            android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/rlRemoteView"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.remotemonster.sdk.PercentFrameLayout
-                android:id="@+id/perFrameRemote"
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <com.remotemonster.sdk.core.SurfaceViewRenderer
-                    android:id="@+id/surfRendererRemote"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <com.remotemonster.sdk.PercentFrameLayout
+                    android:id="@+id/perFrameLocal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </com.remotemonster.sdk.PercentFrameLayout>
+                    android:layout_height="match_parent">
+                    <org.webrtc.SurfaceViewRenderer
+                        android:id="@+id/surfRendererLocal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.remotemonster.sdk.PercentFrameLayout>
 
-            <TextView
-                android:background="@android:color/darker_gray"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center_horizontal"
+                    android:text="Local"/>
+
+                <FrameLayout
+                    android:id="@+id/fraglRemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <RelativeLayout
+                android:id="@+id/rlRemoteView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Remote"/>
-        </RelativeLayout>
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <com.remotemonster.sdk.PercentFrameLayout
+                    android:id="@+id/perFrameRemote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <org.webrtc.SurfaceViewRenderer
+                        android:id="@+id/surfRendererRemote"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.remotemonster.sdk.PercentFrameLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center_horizontal"
+                    android:text="Remote"/>
+            </RelativeLayout>
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>

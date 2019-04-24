@@ -1,148 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <LinearLayout
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-                <Button
-                    android:layout_weight="1"
-                    android:id="@+id/btnRemonCastClose"
-                    android:textColor="@android:color/white"
-                    android:text="close"
-                    android:layout_margin="2dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:layout_weight="1"
-                    android:id="@+id/btnStatReport"
-                    android:textColor="@android:color/white"
-                    android:text="Stat Report"
-                    android:layout_margin="2dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:layout_weight="1"
-                    android:id="@+id/btnViewCast"
-                    android:textColor="@android:color/white"
-                    android:text="View Cast"
-                    android:layout_margin="2dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:layout_weight="1"
-                    android:id="@+id/btnSpeakerOnOff"
-                    android:textColor="@android:color/white"
-                    android:text="Speaker On/Off"
-                    android:layout_margin="2dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:background="@android:color/darker_gray"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Local"/>
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TextView
-                    android:background="@android:color/darker_gray"
+                android:orientation="horizontal">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Log"/>
-                <ScrollView
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/scvLog"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/tvLog"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/btnRemonCastClose"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"/>
-                </ScrollView>
-                <TextView
-                    android:background="@android:color/darker_gray"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="close"
+                        android:textColor="@android:color/white"/>
+
+                    <Button
+                        android:id="@+id/btnStatReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="Stat Report"
+                        android:textColor="@android:color/white"/>
+
+                    <Button
+                        android:id="@+id/btnViewCast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="View Cast"
+                        android:textColor="@android:color/white"/>
+
+                    <Button
+                        android:id="@+id/btnSpeakerOnOff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimaryDark"
+                        android:text="Speaker On/Off"
+                        android:textColor="@android:color/white"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/darker_gray"
+                        android:gravity="center_horizontal"
+                        android:text="Local"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Remote"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/darker_gray"
+                        android:gravity="center_horizontal"
+                        android:text="Log"/>
+                    <ScrollView
+                        android:id="@+id/scvLog"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/tvLog"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"/>
+                    </ScrollView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/darker_gray"
+                        android:gravity="center_horizontal"
+                        android:text="Remote"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_weight="1"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-        </LinearLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.remotemonster.sdk.PercentFrameLayout
-            android:id="@+id/perFrameLocal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.remotemonster.sdk.core.SurfaceViewRenderer
-                android:id="@+id/surfRendererLocal"
+            android:layout_weight="1">
+            <com.remotemonster.sdk.PercentFrameLayout
+                android:id="@+id/perFrameLocal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </com.remotemonster.sdk.PercentFrameLayout>
-    </RelativeLayout>
+                android:layout_height="match_parent">
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererLocal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.remotemonster.sdk.PercentFrameLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rlRemoteView"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.remotemonster.sdk.PercentFrameLayout
-            android:id="@+id/perFrameRemote"
+        <RelativeLayout
+            android:id="@+id/rlRemoteView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.remotemonster.sdk.core.SurfaceViewRenderer
-                android:id="@+id/surfRendererRemote"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <com.remotemonster.sdk.PercentFrameLayout
+                android:id="@+id/perFrameRemote"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </com.remotemonster.sdk.PercentFrameLayout>
-        <ImageView
-            android:id="@+id/imvRemoteScreenChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:src="@android:drawable/ic_menu_manage"
-            android:layout_margin="3dp"
-            android:padding="5dp"/>
+                android:layout_height="match_parent">
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererRemote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.remotemonster.sdk.PercentFrameLayout>
+            <ImageView
+                android:id="@+id/imvRemoteScreenChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="3dp"
+                android:padding="5dp"
+                android:src="@android:drawable/ic_menu_manage"/>
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</layout>
+

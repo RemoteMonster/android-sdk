@@ -2,12 +2,14 @@ package com.remotemonster.sdktest.sample;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.remon.sdktest.R;
+import com.remon.sdktest.databinding.ActivityRouterBinding;
 
 public class RouterActivity extends AppCompatActivity {
     public static final String[] MANDATORY_PERMISSIONS = {
@@ -23,28 +25,24 @@ public class RouterActivity extends AppCompatActivity {
             "android.permission.BLUETOOTH_ADMIN",
             "android.permission.WRITE_EXTERNAL_STORAGE"
     };
-    Button btnRemonCast;
-    Button btnRemonCall;
+    private ActivityRouterBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_router);
-
-        btnRemonCast = (Button) findViewById(R.id.btnRemonCast);
-        btnRemonCall = (Button) findViewById(R.id.btnRemonCall);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_router);
 
         if (Build.VERSION.SDK_INT >= 23) {
             checkPermission(MANDATORY_PERMISSIONS);
         }
 
-        btnRemonCall.setOnClickListener(v -> {
+        mBinding.btnRemonCall.setOnClickListener(v -> {
             Intent intent = new Intent(RouterActivity.this, ListActivity.class);
             intent.putExtra("remonType", 0);
             startActivity(intent);
         });
 
-        btnRemonCast.setOnClickListener(v -> {
+        mBinding.btnRemonCast.setOnClickListener(v -> {
             Intent intent = new Intent(RouterActivity.this, ListActivity.class);
             intent.putExtra("remonType", 1);
             startActivity(intent);

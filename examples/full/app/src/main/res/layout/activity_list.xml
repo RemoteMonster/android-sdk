@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/btnCreate"
-        android:layout_alignParentBottom="true"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:text="Create"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+        android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/lvChannel"
-        android:layout_alignParentTop="true"
-        android:layout_above="@id/btnCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnCreate"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Create"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+        <ListView
+            android:id="@+id/lvChannel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btnCreate"
+            android:layout_alignParentTop="true"/>
+    </RelativeLayout>
+</layout>

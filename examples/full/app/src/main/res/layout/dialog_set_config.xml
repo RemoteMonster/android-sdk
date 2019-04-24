@@ -1,272 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent" >
 
     <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
         android:gravity="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:id="@+id/tvTitle"
         android:layout_height="52dp"
+        android:layout_width="match_parent"
         android:text="Config Setting"
-        android:background="@color/colorPrimary"/>
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <LinearLayout
-        android:padding="10dp"
         android:id="@+id/llChannelName"
         android:layout_below="@id/tvTitle"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="CHANNEL NAME"
             android:textSize="17dp"/>
 
         <EditText
-            android:layout_weight="1"
             android:id="@+id/etChannelName"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:paddingLeft="5dp"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:paddingLeft="5dp"/>
     </LinearLayout>
 
 
     <ScrollView
-        android:layout_below="@id/llChannelName"
         android:layout_above="@id/btnOk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_below="@id/llChannelName"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
         <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:orientation="vertical">
+            android:paddingRight="20dp">
 
             <!--<com.remotemonster.sdk.core.SimulcastSpinner-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:gravity="right|center_vertical"/>-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:gravity="right|center_vertical"/>-->
 
             <RelativeLayout
-                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:paddingRight="-20dp"
-                android:paddingLeft="10dp">
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="-20dp">
                 <Spinner
-                    android:id="@+id/spVideoCodec"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right|center_vertical"
                     android:entries="@array/videoCodecs"
-                    android:layout_width="130dp"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:id="@+id/spVideoCodec"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textSize="18sp"
-                    android:text="Video Codec"/>
+                    android:layout_height="match_parent"
+                    android:layout_width="130dp"/>
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Video Codec"
+                    android:textSize="18sp"/>
             </RelativeLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
 
             <RelativeLayout
-                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:paddingRight="-20dp"
-                android:paddingLeft="10dp">
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="-20dp">
                 <Spinner
-                    android:id="@+id/spAudioCodec"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right|center_vertical"
                     android:entries="@array/audioCodecs"
-                    android:layout_width="130dp"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:id="@+id/spAudioCodec"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textSize="18sp"
-                    android:text="Audio Codec"/>
+                    android:layout_height="match_parent"
+                    android:layout_width="130dp"/>
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Audio Codec"
+                    android:textSize="18sp"/>
             </RelativeLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
 
             <!-- Video Width -->
             <LinearLayout
-                android:id="@+id/llVideoWidth"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="10dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:id="@+id/llVideoWidth"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
                 <TextView
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Video Width"/>
+                    android:text="Video Width"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/tvVideoWidth"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
                     android:text="640"/>
             </LinearLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
 
             <!-- Video Height -->
             <LinearLayout
-                android:id="@+id/llVideoHeight"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="10dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:id="@+id/llVideoHeight"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
                 <TextView
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Video Height"/>
+                    android:text="Video Height"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/tvVideoHeight"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
                     android:text="480"/>
             </LinearLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
 
             <!-- Video Fps -->
             <LinearLayout
-                android:id="@+id/llVideoFps"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="10dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:id="@+id/llVideoFps"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
                 <TextView
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Video Fps"/>
+                    android:text="Video Fps"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/tvVideoFps"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
                     android:text="30"/>
             </LinearLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
 
             <!-- First Video Bitrate -->
             <LinearLayout
-                android:id="@+id/llfirstVideoBitrate"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="10dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:id="@+id/llfirstVideoBitrate"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
                 <TextView
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="First Video Bitrate"/>
+                    android:text="First Video Bitrate"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/tvFirstVideoBitrate"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
                     android:text="1000"/>
             </LinearLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
 
             <!-- First Video Bitrate -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="10dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
                 <TextView
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Use Video"/>
+                    android:text="Use Video"
+                    android:textSize="18sp"/>
                 <CheckBox
-                    android:id="@+id/cbEnableVideoCall"
                     android:checked="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:id="@+id/cbEnableVideoCall"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
             </LinearLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
 
 
             <RelativeLayout
-                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:paddingRight="-20dp"
-                android:paddingLeft="10dp">
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="-20dp">
                 <Spinner
-                    android:id="@+id/spAudioType"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right|center_vertical"
                     android:entries="@array/audioType"
-                    android:layout_width="130dp"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:id="@+id/spAudioType"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textSize="18sp"
-                    android:text="Audio Type"/>
+                    android:layout_height="match_parent"
+                    android:layout_width="130dp"/>
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Audio Type"
+                    android:textSize="18sp"/>
             </RelativeLayout>
             <View
-                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:layout_width="match_parent"/>
         </LinearLayout>
     </ScrollView>
 
     <Button
+        android:backgroundTint="@color/colorPrimaryDark"
         android:id="@+id/btnOk"
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
+        android:layout_width="match_parent"
         android:text="OK"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+        android:textColor="@android:color/white"
+        android:textStyle="bold"/>
 </RelativeLayout>

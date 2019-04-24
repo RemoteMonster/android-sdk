@@ -1,41 +1,21 @@
 package com.remotemonster.sdktest.sample;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.remon.sdktest.R;
+import com.remon.sdktest.databinding.ActivityCastBinding;
 import com.remotemonster.sdk.Config;
-import com.remotemonster.sdk.PercentFrameLayout;
 import com.remotemonster.sdk.RemonCast;
-import com.remotemonster.sdk.core.SurfaceViewRenderer;
 import com.remotemonster.sdk.data.AudioType;
 
 import org.webrtc.RendererCommon;
 
 public class CastActivity extends AppCompatActivity {
-    Button btnRemonCastClose;
-    TextView tvLog;
-    ScrollView scvLog;
-    SurfaceViewRenderer surfRendererLocal;
-    PercentFrameLayout perFrameLocal;
-    SurfaceViewRenderer surfRendererRemote;
-    PercentFrameLayout perFrameRemote;
-    Button btnStatReport;
-    Button btnViewCast;
-    RelativeLayout rlRemoteView;
-    Button btnSpeakerOnOff;
-    ImageView imvRemoteScreenChange;
-
-
     private RemonApplication remonApplication;
     private String connectChId;
     private RemonCast remonCast = null;
@@ -43,32 +23,22 @@ public class CastActivity extends AppCompatActivity {
     private boolean isCastView = false;
     private boolean isSpeakerOn = true;
     private boolean isRemoteFullScreen = false;
+    private ActivityCastBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_cast);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cast);
+
         remonApplication = (RemonApplication) getApplicationContext();
 
-        btnRemonCastClose = (Button) findViewById(R.id.btnRemonCastClose);
-        tvLog = (TextView) findViewById(R.id.tvLog);
-        scvLog = (ScrollView) findViewById(R.id.scvLog);
-        surfRendererLocal = (SurfaceViewRenderer) findViewById(R.id.surfRendererLocal);
-        perFrameLocal = (PercentFrameLayout) findViewById(R.id.perFrameLocal);
-        surfRendererRemote = (SurfaceViewRenderer) findViewById(R.id.surfRendererRemote);
-        perFrameRemote = (PercentFrameLayout) findViewById(R.id.perFrameRemote);
-        btnStatReport = (Button) findViewById(R.id.btnStatReport);
-        btnViewCast = (Button) findViewById(R.id.btnViewCast);
-        rlRemoteView = (RelativeLayout) findViewById(R.id.rlRemoteView);
-        btnSpeakerOnOff =(Button) findViewById(R.id.btnSpeakerOnOff);
-        imvRemoteScreenChange = (ImageView) findViewById(R.id.imvRemoteScreenChange);
 
         isRemoteFullScreen = false;
-        perFrameLocal.setPosition(0, 50, 50, 50);
-        perFrameRemote.setPosition(50, 50, 50, 50);
+        mBinding.perFrameLocal.setPosition(0, 50, 50, 50);
+        mBinding.perFrameRemote.setPosition(50, 50, 50, 50);
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isCreate", false)) {
@@ -76,7 +46,7 @@ public class CastActivity extends AppCompatActivity {
             ConfigDialog configDialog = new ConfigDialog(CastActivity.this, true, chid -> {
                 Config config;
                 config = remonApplication.getConfig();
-                config.setLocalView(surfRendererLocal);
+                config.setLocalView(mBinding.surfRendererLocal);
                 config.setActivity(CastActivity.this);
                 config.logLevel = Log.VERBOSE;
                 config.setAudioStartBitrate(256);
@@ -94,7 +64,7 @@ public class CastActivity extends AppCompatActivity {
                 ConfigDialog configDialog = new ConfigDialog(CastActivity.this, false, chid -> {
                     Config config;
                     config = remonApplication.getConfig();
-                    config.setRemoteView(surfRendererRemote);
+                    config.setRemoteView(mBinding.surfRendererRemote);
                     config.setActivity(CastActivity.this);
                     config.setVideoCodec("VP8");
                     remonCast = new RemonCast();
@@ -105,7 +75,7 @@ public class CastActivity extends AppCompatActivity {
             } else {
                 castViewer = RemonCast.builder()
                         .context(CastActivity.this)
-                        .remoteView(surfRendererRemote)
+                        .remoteView(mBinding.surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
                         .restUrl(remonApplication.getConfig().restHost)
@@ -118,7 +88,7 @@ public class CastActivity extends AppCompatActivity {
         }
 
 
-        btnRemonCastClose.setOnClickListener(v -> {
+        mBinding.btnRemonCastClose.setOnClickListener(v -> {
             addLog("Start close");
             if (remonCast != null) {
                 remonCast.close();
@@ -129,21 +99,21 @@ public class CastActivity extends AppCompatActivity {
         });
 
 
-        btnStatReport.setOnClickListener(v -> remonCast.enableStatView(true, rlRemoteView));
-        btnStatReport.setOnClickListener(view -> {
+        mBinding.btnStatReport.setOnClickListener(v -> remonCast.enableStatView(true, mBinding.rlRemoteView));
+        mBinding.btnStatReport.setOnClickListener(view -> {
             if (isCastView) {
-                castViewer.enableStatView(true, rlRemoteView);
+                castViewer.enableStatView(true, mBinding.rlRemoteView);
             } else {
-                remonCast.enableStatView(true, rlRemoteView);
+                remonCast.enableStatView(true, mBinding.rlRemoteView);
             }
         });
 
-        btnViewCast.setOnClickListener(v -> {
+        mBinding.btnViewCast.setOnClickListener(v -> {
             if (!isCastView) {
                 /* 자신이 시청중이 아니라면 방송시청*/
                 castViewer = RemonCast.builder()
                         .context(CastActivity.this)
-                        .remoteView(surfRendererRemote)
+                        .remoteView(mBinding.surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
                         .restUrl(remonApplication.getConfig().restHost)
@@ -154,22 +124,22 @@ public class CastActivity extends AppCompatActivity {
             }
         });
 
-        btnSpeakerOnOff.setOnClickListener(v -> {
+        mBinding.btnSpeakerOnOff.setOnClickListener(v -> {
             if (castViewer != null) {
                 isSpeakerOn = isSpeakerOn ? (isSpeakerOn = false) : (isSpeakerOn = true);
                 castViewer.setSpeakerphoneOn(isSpeakerOn);
             }
         });
 
-        imvRemoteScreenChange.setOnClickListener(view -> runOnUiThread(() -> {
+        mBinding.imvRemoteScreenChange.setOnClickListener(view -> runOnUiThread(() -> {
             if (isRemoteFullScreen) {
                 isRemoteFullScreen = false;
-                perFrameRemote.setPosition(50, 50, 50, 50);
-                perFrameRemote.requestLayout();
+                mBinding.perFrameRemote.setPosition(50, 50, 50, 50);
+                mBinding.perFrameRemote.requestLayout();
             } else {
                 isRemoteFullScreen = true;
-                perFrameRemote.setPosition(0, 0, 100, 100);
-                perFrameRemote.requestLayout();
+                mBinding.perFrameRemote.setPosition(0, 0, 100, 100);
+                mBinding.perFrameRemote.requestLayout();
             }
         }));
     }
@@ -184,7 +154,7 @@ public class CastActivity extends AppCompatActivity {
             });
             castViewer.onJoin(() -> {
                 addLog("onJoin");
-                runOnUiThread(() -> surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL));
+                runOnUiThread(() -> mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL));
             });
             castViewer.onClose(() -> finish());
             castViewer.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
@@ -205,8 +175,8 @@ public class CastActivity extends AppCompatActivity {
     private void addLog(String log) {
         mPriorLog = mPriorLog + log + "\n";
         runOnUiThread(() -> {
-            tvLog.setText(mPriorLog);
-            scvLog.scrollTo(0, scvLog.getBottom());
+            mBinding.tvLog.setText(mPriorLog);
+            mBinding.scvLog.scrollTo(0, mBinding.scvLog.getBottom());
         });
     }
 
