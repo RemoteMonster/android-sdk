@@ -28,25 +28,23 @@ public class CallActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 화면 계속 켜져있도록
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_call);
 
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_call);
         remonApplication = (RemonApplication) getApplicationContext();
 
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isCreate", false)) {
             ConfigDialog configDialog = new ConfigDialog(CallActivity.this, true, chid -> {
+                remonCall = new RemonCall();
                 Config config;
                 config = remonApplication.getConfig();
                 config.setLocalView(mBinding.surfRendererLocal);
                 config.setRemoteView(mBinding.surfRendererRemote);
-                config.setRestHost(remonApplication.getConfig().restHost);
-                config.setSocketUrl(remonApplication.getConfig().socketUrl);
                 config.setActivity(CallActivity.this);
-                connectChId = chid;
-
-                remonCall = new RemonCall();
                 setCallback();
+                connectChId = chid;
                 remonCall.connect(connectChId, config);
             });
             configDialog.show();
@@ -100,9 +98,7 @@ public class CallActivity extends AppCompatActivity {
     }
 
     private void setCallback() {
-        remonCall.onInit(() -> {
-            addLog("onInit");
-        });
+        remonCall.onInit(() -> addLog("onInit"));
         remonCall.onMessage(msg -> addLog(msg));
         remonCall.onConnect((String id) -> addLog("onConnect : " + id));
         remonCall.onComplete(() -> runOnUiThread(() -> {
@@ -110,9 +106,8 @@ public class CallActivity extends AppCompatActivity {
             mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
         }));
         remonCall.onClose((closeType) -> addLog("onClose : "+ closeType.toString()));
-        remonCall.onError(e -> addLog(
-                "error code : " + e.getRemonCode().toString() + " / " + e.getDescription()));
-        remonCall.onStat(report -> addLog("Print report"));
+        remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString() + " / " + e.getDescription()));
+        remonCall.onStat(report -> addLog("Receive report - fps : "+report.getRemoteFrameRate()));
     }
 
     private String mPriorLog = "";

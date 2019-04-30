@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.remon.sdktest.R;
@@ -12,6 +13,7 @@ import com.remon.sdktest.databinding.ActivityCastBinding;
 import com.remotemonster.sdk.Config;
 import com.remotemonster.sdk.RemonCast;
 import com.remotemonster.sdk.data.AudioType;
+import com.remotemonster.sdk.stat.RemonStatReport;
 
 import org.webrtc.RendererCommon;
 
@@ -35,7 +37,6 @@ public class CastActivity extends AppCompatActivity {
 
         remonApplication = (RemonApplication) getApplicationContext();
 
-
         isRemoteFullScreen = false;
         mBinding.perFrameLocal.setPosition(0, 50, 50, 50);
         mBinding.perFrameRemote.setPosition(50, 50, 50, 50);
@@ -44,45 +45,46 @@ public class CastActivity extends AppCompatActivity {
         if (intent.getBooleanExtra("isCreate", false)) {
             /* config set 후 방송생성*/
             ConfigDialog configDialog = new ConfigDialog(CastActivity.this, true, chid -> {
+                remonCast = new RemonCast();
+
                 Config config;
                 config = remonApplication.getConfig();
                 config.setLocalView(mBinding.surfRendererLocal);
                 config.setActivity(CastActivity.this);
-                config.logLevel = Log.VERBOSE;
-                config.setAudioStartBitrate(256);
-                config.setAudioType(AudioType.MUSIC);
+                setCallback(false, remonCast);
+
                 connectChId = chid;
-                remonCast = new RemonCast();
-                setCallback(false);
                 remonCast.create(connectChId, config);
             });
             configDialog.show();
         } else {
             /* List에 있던 방송 시청 */
             connectChId = intent.getStringExtra("chid");
+
+
             if (intent.getBooleanExtra("setConfig", false)) {
+                /* Config 수정 후 시청 */
                 ConfigDialog configDialog = new ConfigDialog(CastActivity.this, false, chid -> {
+                    castViewer = new RemonCast();
                     Config config;
                     config = remonApplication.getConfig();
                     config.setRemoteView(mBinding.surfRendererRemote);
                     config.setActivity(CastActivity.this);
-                    config.setVideoCodec("VP8");
-                    remonCast = new RemonCast();
-                    setCallback(true);
-                    remonCast.join(connectChId, config);
+                    setCallback(true, castViewer);
+
+                    castViewer.join(connectChId, config);
                 });
                 configDialog.show();
             } else {
+                /* 즉시 시청 */
                 castViewer = RemonCast.builder()
                         .context(CastActivity.this)
                         .remoteView(mBinding.surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
-                        .restUrl(remonApplication.getConfig().restHost)
-                        .wssUrl(remonApplication.getConfig().socketUrl)
-                        .videoCodec("VP8")
                         .build();
-                setCallback(true);
+                setCallback(true, castViewer);
+
                 castViewer.join(connectChId);
             }
         }
@@ -99,7 +101,6 @@ public class CastActivity extends AppCompatActivity {
         });
 
 
-        mBinding.btnStatReport.setOnClickListener(v -> remonCast.enableStatView(true, mBinding.rlRemoteView));
         mBinding.btnStatReport.setOnClickListener(view -> {
             if (isCastView) {
                 castViewer.enableStatView(true, mBinding.rlRemoteView);
@@ -116,13 +117,13 @@ public class CastActivity extends AppCompatActivity {
                         .remoteView(mBinding.surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
-                        .restUrl(remonApplication.getConfig().restHost)
-                        .wssUrl(remonApplication.getConfig().socketUrl)
                         .build();
-                setCallback(true);
+                setCallback(true, castViewer);
+
                 castViewer.join(remonCast.getId());
             }
         });
+
 
         mBinding.btnSpeakerOnOff.setOnClickListener(v -> {
             if (castViewer != null) {
@@ -131,6 +132,8 @@ public class CastActivity extends AppCompatActivity {
             }
         });
 
+
+        // 영상크기 변환시 사용
         mBinding.imvRemoteScreenChange.setOnClickListener(view -> runOnUiThread(() -> {
             if (isRemoteFullScreen) {
                 isRemoteFullScreen = false;
@@ -144,34 +147,31 @@ public class CastActivity extends AppCompatActivity {
         }));
     }
 
-    private void setCallback(boolean isCastView) {
-
-        if (isCastView) {
-            castViewer.onInit(() -> addLog("onInit"));
-            castViewer.onComplete(() -> {
-                addLog("onComplete");
-                this.isCastView = isCastView;
-            });
-            castViewer.onJoin(() -> {
-                addLog("onJoin");
-                runOnUiThread(() -> mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL));
-            });
-            castViewer.onClose(() -> finish());
-            castViewer.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
-            castViewer.onStat(report -> addLog("Print report"));
-        } else {
-            remonCast.onInit(() -> addLog("onInit"));
-            remonCast.onCreate((String id) -> addLog("onCreate : " + id));
-            remonCast.onComplete(() -> addLog("onComplete"));
-            remonCast.onClose(() -> finish());
-            remonCast.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
-            remonCast.onStat(report -> addLog("Print report"));
-        }
+    private void setCallback(boolean isCastView, RemonCast remonCast) {
+        remonCast.onInit(() -> addLog("onInit"));
+        remonCast.onCreate((String id) -> addLog("onCreate : " + id));
+        remonCast.onComplete(() -> {
+            addLog("onComplete");
+            this.isCastView = isCastView;
+        });
+        remonCast.onJoin(() -> {
+            addLog("onJoin");
+            runOnUiThread(() -> mBinding.surfRendererRemote.setScalingType(
+                    RendererCommon.ScalingType.SCALE_ASPECT_FILL));
+        });
+        remonCast.onClose(() -> finish());
+        remonCast.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
+        remonCast.onStat(report -> {
+            if (isCastView) {
+                addLog("Receive report - fps : " + report.getRemoteFrameRate());
+            } else {
+                addLog("Receive report - fps : " + report.getLocalFrameRate());
+            }
+        });
     }
 
 
     private String mPriorLog = "";
-
     private void addLog(String log) {
         mPriorLog = mPriorLog + log + "\n";
         runOnUiThread(() -> {
