@@ -12,10 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.remon.sdktest.R;
 import com.remon.sdktest.databinding.ActivityListBinding;
@@ -25,7 +21,6 @@ import com.remotemonster.sdk.RemonCast;
 import com.remotemonster.sdk.data.Room;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by lucas on 2018. 5. 16..

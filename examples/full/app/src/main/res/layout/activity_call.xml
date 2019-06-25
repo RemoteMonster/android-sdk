@@ -16,6 +16,7 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical">
                 <Button
+                    android:layout_weight="1"
                     android:id="@+id/btnRemonFactoryClose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -25,6 +26,7 @@
                     android:textColor="@android:color/white"/>
 
                 <Button
+                    android:layout_weight="1"
                     android:id="@+id/btnStatReport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -34,12 +36,23 @@
                     android:textColor="@android:color/white"/>
 
                 <Button
+                    android:layout_weight="1"
                     android:id="@+id/btnSpeakerOnOff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/colorPrimaryDark"
                     android:text="speakerphon On/Off"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/btnSendMsg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Send Msg"
                     android:textColor="@android:color/white"/>
             </LinearLayout>
 

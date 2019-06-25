@@ -3,7 +3,6 @@ package com.remotemonster.sdktest.sample;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.remon.sdktest.R;
-import com.remon.sdktest.databinding.DialogSetConfigBinding;
 import com.remotemonster.sdk.data.AudioType;
 
 /**

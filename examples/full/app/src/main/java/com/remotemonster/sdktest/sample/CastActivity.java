@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 
 import com.remon.sdktest.R;
 import com.remon.sdktest.databinding.ActivityCastBinding;
 import com.remotemonster.sdk.Config;
 import com.remotemonster.sdk.RemonCast;
-import com.remotemonster.sdk.data.AudioType;
-import com.remotemonster.sdk.stat.RemonStatReport;
 
 import org.webrtc.RendererCommon;
 

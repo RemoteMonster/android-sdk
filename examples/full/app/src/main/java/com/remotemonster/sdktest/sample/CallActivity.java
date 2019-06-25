@@ -5,7 +5,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.remon.sdktest.R;
 import com.remon.sdktest.databinding.ActivityCallBinding;
@@ -80,11 +82,16 @@ public class CallActivity extends AppCompatActivity {
             }
         }
 
-        mBinding.btnSpeakerOnOff.setOnClickListener(view -> remonCall.setSpeakerphoneOn(true));
         mBinding.btnSpeakerOnOff.setOnClickListener(view -> {
             if (remonCall != null) {
                 isSpeakerOn = isSpeakerOn ? (isSpeakerOn = false) : (isSpeakerOn = true);
                 remonCall.setSpeakerphoneOn(isSpeakerOn);
+            }
+        });
+
+        mBinding.btnSendMsg.setOnClickListener(view -> {
+            if (remonCall != null) {
+                remonCall.sendMessage("send Message Test");
             }
         });
 
@@ -99,7 +106,10 @@ public class CallActivity extends AppCompatActivity {
 
     private void setCallback() {
         remonCall.onInit(() -> addLog("onInit"));
-        remonCall.onMessage(msg -> addLog(msg));
+        remonCall.onMessage(msg -> {
+            addLog(msg);
+            runOnUiThread(() -> Toast.makeText(CallActivity.this, "receive : " + msg, Toast.LENGTH_SHORT).show());
+        });
         remonCall.onConnect((String id) -> addLog("onConnect : " + id));
         remonCall.onComplete(() -> runOnUiThread(() -> {
             mBinding.surfRendererLocal.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
