@@ -5,8 +5,8 @@
 
 ## 리모트 몬스터 문서
 
-[https://docs.remotemonster.com/] (https://docs.remotemonster.com/)
+https://docs.remotemonster.com/
 
 ## 리모트 몬스터 커뮤니티
 
-[https://docs.remotemonster.com/] (https://docs.remotemonster.com/)
+https://community.remotemonster.com/
