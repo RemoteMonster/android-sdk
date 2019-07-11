@@ -14,7 +14,7 @@ RemoteMonster - Livecast Management in the Cloud
 // build.gradle(Module:app)
 
 dependencies {
-    compile 'com.remotemonster:sdk:2.0.12'
+    compile 'com.remotemonster:sdk:2.4.3'
 }
 ```
 
