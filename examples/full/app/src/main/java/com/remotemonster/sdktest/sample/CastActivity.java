@@ -152,8 +152,7 @@ public class CastActivity extends AppCompatActivity {
         });
         remonCast.onJoin(() -> {
             addLog("onJoin");
-            runOnUiThread(() -> mBinding.surfRendererRemote.setScalingType(
-                    RendererCommon.ScalingType.SCALE_ASPECT_FILL));
+            mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
         });
         remonCast.onClose(() -> finish());
         remonCast.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
@@ -170,10 +169,8 @@ public class CastActivity extends AppCompatActivity {
     private String mPriorLog = "";
     private void addLog(String log) {
         mPriorLog = mPriorLog + log + "\n";
-        runOnUiThread(() -> {
-            mBinding.tvLog.setText(mPriorLog);
-            mBinding.scvLog.scrollTo(0, mBinding.scvLog.getBottom());
-        });
+        mBinding.tvLog.setText(mPriorLog);
+        mBinding.scvLog.scrollTo(0, mBinding.scvLog.getBottom());
     }
 
     @Override

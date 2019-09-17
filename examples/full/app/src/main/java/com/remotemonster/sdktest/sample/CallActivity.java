@@ -108,13 +108,13 @@ public class CallActivity extends AppCompatActivity {
         remonCall.onInit(() -> addLog("onInit"));
         remonCall.onMessage(msg -> {
             addLog(msg);
-            runOnUiThread(() -> Toast.makeText(CallActivity.this, "receive : " + msg, Toast.LENGTH_SHORT).show());
+            Toast.makeText(CallActivity.this, "receive : " + msg, Toast.LENGTH_SHORT).show();
         });
         remonCall.onConnect((String id) -> addLog("onConnect : " + id));
-        remonCall.onComplete(() -> runOnUiThread(() -> {
+        remonCall.onComplete(() ->  {
             mBinding.surfRendererLocal.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
             mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
-        }));
+        });
         remonCall.onClose((closeType) -> addLog("onClose : "+ closeType.toString()));
         remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString() + " / " + e.getDescription()));
         remonCall.onStat(report -> addLog("Receive report - fps : "+report.getRemoteFrameRate()));
@@ -124,10 +124,10 @@ public class CallActivity extends AppCompatActivity {
 
     private void addLog(String log) {
         mPriorLog = mPriorLog + log + "\n";
-        runOnUiThread(() -> {
-            mBinding.tvLog.setText(mPriorLog);
-            mBinding.scvLog.scrollTo(0, mBinding.scvLog.getBottom());
-        });
+
+        mBinding.tvLog.setText(mPriorLog);
+        mBinding.scvLog.scrollTo(0, mBinding.scvLog.getBottom());
+
     }
 
     @Override
