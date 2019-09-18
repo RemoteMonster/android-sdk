@@ -1,46 +1,230 @@
 # CHANGELOG
-## 0.3.41 (2017.12.26)
-- android studio 3.0.x 에서의 빌드 버그 해결
 
-## 0.3.20 (2017.11.05)
-- 간단한 화면 필터기능 추가(흑백, blur)
-- 주기적인 화면 캡쳐 기능 추가
-## 0.3.18 (2017.10.30)
-- 성능을 높인 방송 기능 추가
-- 기본 코덱을 h.264로 변경
-- bitrate를 기본 700으로 수정
-## 0.3.15 (2017.09.14)
-- 각종 방송 close, disconnect관련 에러 수정. 비정상 종료시 dummy방 생기는 문제 해결
-## 0.3.1 (2017.08.22)
-- 방송 기능 추가
-## 0.2.65 (2017.07.65)
-- 영상 health정보를 주는 health check기능 추가
-## 0.2.61 (2017.06.12)
-- localview를 미리 show할 경우 발생하는 버그 해결
-## 0.2.57 (2017.05.22)
-- softclose시 audiomanager.close 안함
-## 0.2.55 (2017.05.19)
-- singleRemonFactory에 switchCamera기능 추가
-## 0.2.49 (2017.04.29)
-- onInit과 onStateChange.INIT이벤트가 동일하게 Remon객체가 온전히 생성되었고 Remon서버와 연결되었을 때 호출되게 변경
-- 방송 기능 일부 추가(베타기능)
-- 항상 하나의 Remon객체만 호출되고 종료될 수 있는 singleton factory를 제공. RemonSingleFactory
+## 2.4.14
+- fixed a problem that is not initialized surface views(local,remote) on Remon.createObjects()
+- added some comments
+- added check routine in willOutputBuffer functions
+- updated WebRTC 1.0.26885
+- changed static media objects to local
+- migrated media functions in PeerConnection to MediaManager
+- refactored connection, media codes
+- added a null check for startCapture
+- fixed some issues the connection to be disconnected when some user has joined
+- modified callback thread. Client callbacks of remonCall, remonCast will be called on UI Thread
 
-## 0.2.4 (2017.01.09)
-speaker phone mode false안되는 것 수정
+## 2.4.12
+- added a interface method with VideoFrame arguemnt
 
-## 0.0.11 (2016.12.07)
-추가: 최초 배포
+## 2.4.10
+- fixed log url property in makeConfigFromClient()
+- modified a duplication sentence in RemonClient, RemonClientBuilder
 
-## 0.0.13 (2016.12.15)
-수정: 상대 peer에서 close시 mediamanager를 close하지 않은것을 close하도록 수정
-수정: audiomode를 peer간 연결 후 communication mode 변경되도록 수정
+## 2.4.8
+- added a property of customVideoCapturerCreator to RemonCall, RemonCast and Builders
 
-## 0.0.14 (2016.12.22)
-수정: 기본 코덱을 h.264로 변경
+## 2.4.7
+- edit simply changes and some unnecessary codes for RemonCall,RemonCast
+- migrate to AndroidX
 
-## 0.0.15 (2016.12.23)
-수정: Observer가 없으면 기본 observer 생성
+## 2.4.5
+- edit createBroadcastChannel msg
+- added a external sample function and updated example project
+- added a sample project for external capturing
 
-## 0.1.0 (2016.12.23)
-__: 0.0.15버전과 변화 없으며 버전관리를 위해 버전 업데이트
+## 2.4.4
+- camera choicing from CameraDevices
+
+## 2.4.2
+- edit firstFront Camera
+
+## 2.4.1
+- add audio release for BT
+
+## 2.2.24
+- Set initial camera orientation
+- add SwitchCamera Callback
+- remove "READ_PHONE_STATE" permission
+
+## 2.2.23
+- Front & back side Select only one camera
+
+## 2.2.22
+- add close exception
+- edit channel close process
+
+## 2.2.21
+- edit LoggerFactory in WebsocketClient.java , netty update 4.1.32 -> 4.1.36
+
+## 2.2.20
+- should be calling close in runOnUiThread
+
+## 2.2.19
+- add Connection pool
+
+## 2.2.18
+- edit config and modify
+
+## 2.2.17
+- check for isFront camera
+
+## 2.2.16
+- add setAudioEnabled Interface
+
+## 2.2.15
+- add flag for isUseAutoProgressbar
+- edit sample source for server change
+
+## 2.2.14
+- remove networkCallback
+- edit for Android Pie
+
+## 2.2.12
+- In case of Error, unpack is finish
+- protect Ilegal Argument
+- edit unregisted receiver
+- catch for illegal Exception
+
+## 2.2.11
+- Added processing for abnormal aecDump files
+
+## 2.2.10
+- Prevent duplicate complete callback
+
+## 2.2.9
+- edit HealthRating
+- add log sending for receive Frame
+- edit version
+- Automatic list synchronization at 3 second intervals
+
+## 2.2.8
+- add Activity check
+- add metadata in log
+
+## 2.2.6
+- remove AUDIOFOCUS_LOSS in close()
+
+## 2.2.4
+- edit audioBitrate values
+
+## 2.2.3
+- get ch Id
+
+## 2.2.2
+- edit AudioControl module (Music,Call)
+
+## 2.2.1
+- edit health report
+
+## 2.2.0
+- webrtc Exception handling when the aecdump file is corrupted due to an abnormal termination cause
+
+## 2.1.9
+- update for lib
+- add value on isCaster
+- update webrtc lib
+- edit CreateVideoTrack (capture & sink)
+- add service id
+
+## 2.1.8
+- fixed bluetooth
+- change audioManager source
+- Modify CloseType Star State Handling
+- Add an end callback event when the other party hangs up
+- change log server and release
+- api18Level Tested on s3
+
+## 2.1.5
+- add isChangeAudioMode pram and change record modules
+
+## 2.1.4
+- Separate audio mode between call mode and broadcasting mode, supplement bt sco abnormal operation
+- edit Typing Noise, OpenSLES value
+
+## 2.1.3
+- edit NS, AEC default value
+- edit reconnect process
+- add new reconnect process
+- refactoring for connect process
+- change connect module (test complete)
+- Fixed to terminate normally when there is no network
+- Implement simulcast function and complete test
+- feat for simulcast
+
+## 2.1.2
+- edit default value
+
+## 2.1.1
+- edit chore for sdk update
+
+## 2.1.0
+- edit AudioFilter Type, add simulcast function
+- edit chore for WebrtcAudio
+
+## 2.0.24
+- Fixed volume control bug
+- remove volume control type
+
+## 2.0.22
+- change Webrtc Audio Track attribute usage
+- log sending to Kafka (topic health and log completion)
+- add sendLog interface
+- add AudioRecord Interface
+- 16000 'resampling' processing and efficient algorithm application
+- Unpacking efficiency increased by 70%
+- Because webrtc dump file is in Little-endian format, it must be in Little-endian format, and clipping is added
+
+
+## 2.0.21
+- Modify the connect, create, and join functions so that they are available at any time if remon is created
+- Video codec setting, default h264 to vp8
+- Cleanup api for creating aec_dump file For RemonCall and RemonCast, if saveInputAudioToFile is set to true,
+- useOpenSLES = false, and isAecDump = true
+- Add audio logic to create aec_dump file after Audio Record
+- It works according to the value of saveInputAudioToFile, useOpenSLES must be false, and isAecDump must be true. (Applies to v1.0 config only)
+- Implement screen and mic recording function using MediaProjection
+- add WebViewCall test, edit Optional docs
+
+
+## 2.0.19
+- stop using proximity sensor and modify speakerphone mode to turn it off and on manually
+- Fixed the problem that Bluetooth connection was not reconnected, and BluetoothManager stop should be managed by AudioManager
+- Modify Proximity Sensor Handling of Bluetooth and Modify Example Project
+
+## 2.0.18
+- change the AudioType default value for remonCall and remonCast
+- apply settings for audio device settings
+
+## 2.0.17
+- apply settings for audio device settings
+- set audioType through config setting
+- cast is "music", call is "voice" default
+
+## 2.0.16
+- setting for audioConstraints madatory
+- added for audio performance measurements
+- add audio setting interface
+
+## 2.0.12
+- docs translated into English
+- change the name of existing close and softclose( close->hardClose, softClose->close)
+- analyze close and softclose and fix unnecessary resource release when softclose
+- soft close audio dispose processing
+- fix code and disconnect issues for close processing
+- onClose in onDeisconnectChannel
+- in the onCreateChannel, Caster comes only with the channelId, and the viewer has the peerId as well
+- close on remonCast when onDisconnect
+- add softClose()
+- edit defaultconfig method
+- modified to voice call
+- braodcast without surfaceview
+- modify callback function name to suit purpose
+- update WebRTC 1.0.23430
+- edit onCreate, onConnect callback event
+- add jcenter build
+- edit docs
+- remove Lombox Lib
+- minor bug fixed
+- rename package
+- produce broadcasts using remon 2.0 version
+- produce samples and configure views
+- implement search and create examples
