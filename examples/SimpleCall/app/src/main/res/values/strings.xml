@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SimpleCall</string>
+
+    <!-- permission check -->
+    <string name="permission_info_dlg_title">Request Permission</string>
+    <string name="permission_info_dlg_message">Camera and microphone usage rights are required for live broadcasting.</string>
+    <string name="permission_info_dlg_message_enter">Allow</string>
+    <string name="permission_deny_dlg_btn_setting">Setting</string>
+    <string name="permission_deny_dlg_btn_close">Done</string>
+    <string name="progress_wait">Please wait.</string>
+</resources>
