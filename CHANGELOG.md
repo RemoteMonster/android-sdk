@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2.6.0
+- modified minor version number in order to synchronize ios sdk
+- added local camera capture manager
+- fixed problemes with using multiple connection 
+- added example for connecting multiple users. examples/SimpleDualCall
+
+
+## 2.4.15
+- added codes for sending log to server
+- added exception code for connection
+
+
 ## 2.4.14
 - fixed a problem that is not initialized surface views(local,remote) on Remon.createObjects()
 - added some comments
