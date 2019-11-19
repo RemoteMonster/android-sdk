@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.1
+- fixed a problem for rest api req/res
+- fixed a flag setting for starting capture
+
 ## 2.6.0
 - modified minor version number in order to synchronize ios sdk
 - added local camera capture manager
