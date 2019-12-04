@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "889242517388",
+    "firebase_url": "https://qrate-3ad33.firebaseio.com",
+    "project_id": "qrate-3ad33",
+    "storage_bucket": "qrate-3ad33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889242517388:android:5d29ba76c8d09bfbbba0a9",
+        "android_client_info": {
+          "package_name": "com.remotemonster.example.meshcall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889242517388-r8raoijo045d9n4h33q9u75k1hs3iod1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXLwbtNZCGQd-mrLgi-yHcTYqq7PjRhtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889242517388-r8raoijo045d9n4h33q9u75k1hs3iod1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

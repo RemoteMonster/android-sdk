@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+
+<!--    <data>-->
+<!--        <import type="androidx.databinding.ObservableArrayList" />-->
+<!--        <import type="com.remotemonster.example.simpleconference.Message"/>-->
+<!--        <variable name="arrayList" type="ObservableArrayList&lt;Message&gt;" />-->
+<!--    </data>-->
+
+
+
+    <RelativeLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+
+            <!-- Local -->
+            <RelativeLayout
+                android:id="@+id/layout0"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/view_shape"
+                app:layout_constraintDimensionRatio="H,1:1.33"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+               >
+
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererLocal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <ToggleButton
+                        android:id="@+id/tbAudio"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/audio_toggle"
+                        android:checked="true"
+                        android:textOff=""
+                        android:textOn="" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+            <!-- Remote 1 -->
+            <FrameLayout
+                android:id="@+id/layout1"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_margin="18dp"
+                app:layout_constraintDimensionRatio="H,1:1.33"
+                app:layout_constraintVertical_bias="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererRemote1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/remon_identity"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible"
+                    />
+
+            </FrameLayout>
+
+
+            <!-- Remote 2 -->
+            <FrameLayout
+                android:id="@+id/layout2"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_margin="18dp"
+                app:layout_constraintDimensionRatio="H,1:1.33"
+                app:layout_constraintVertical_bias="0.3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererRemote2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    />
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/remon_identity"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible"
+                    />
+            </FrameLayout>
+
+
+            <!-- Remote 3 -->
+            <FrameLayout
+                android:id="@+id/layout3"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_margin="18dp"
+                app:layout_constraintDimensionRatio="H,1:1.33"
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererRemote3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    />
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/remon_identity"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible"
+                    />
+            </FrameLayout>
+
+
+            <!-- Remote 4 -->
+            <FrameLayout
+                android:id="@+id/layout4"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_margin="18dp"
+                app:layout_constraintDimensionRatio="H,1:1.33"
+                app:layout_constraintVertical_bias="0.7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererRemote4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    />
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/remon_identity"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible"
+                    />
+            </FrameLayout>
+
+
+
+            <!-- Remote 5 -->
+            <FrameLayout
+                android:id="@+id/layout5"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_margin="18dp"
+
+                app:layout_constraintDimensionRatio="H,1:1.33"
+                app:layout_constraintVertical_bias="0.9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+
+                <org.webrtc.SurfaceViewRenderer
+                    android:id="@+id/surfRendererRemote5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/remon_identity"
+                    android:scaleType="fitCenter"
+                    android:visibility="visible"
+                    />
+            </FrameLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/messageBox"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone">
+
+
+
+<!--            <ListView-->
+<!--                android:id="@+id/messageList"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="8"-->
+<!--                android:divider="#00000000"-->
+<!--                android:clickable="false"-->
+<!--                app:list="@{arrayList}"-->
+<!--                />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="#fff"
+                android:orientation="horizontal"
+                >
+                <EditText
+                    android:layout_weight="1"
+                    android:id="@+id/editMessage"
+                    android:layout_marginStart="10dp"
+                    android:textColor="#000"
+                    android:paddingStart="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="90dp"
+                    android:layout_height="50dp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:text="보내기"
+                    android:backgroundTint="@color/colorPrimaryDark"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imvExit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="15dp"
+            android:src="@android:drawable/presence_offline"/>
+
+
+
+
+    </RelativeLayout>
+
+</layout>
+
