@@ -158,9 +158,9 @@ public class CastActivity extends AppCompatActivity {
         remonCast.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
         remonCast.onStat(report -> {
             if (isCastView) {
-                addLog("Receive report - fps : " + report.getRemoteFrameRate());
+                //addLog("Receive report - fps : " + report.getRemoteFrameRate());
             } else {
-                addLog("Receive report - fps : " + report.getLocalFrameRate());
+                //addLog("Receive report - fps : " + report.getLocalFrameRate());
             }
         });
     }

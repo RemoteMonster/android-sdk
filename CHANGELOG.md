@@ -1,4 +1,9 @@
 # CHANGELOG
+## 2.6.2
+- added a new feature and functionality for conference call
+- fixed an issues for local video capture
+- fixed an issue what the sound output device is changed after phone call
+- fixed minor bugs
 
 ## 2.6.1
 - fixed a problem for rest api req/res

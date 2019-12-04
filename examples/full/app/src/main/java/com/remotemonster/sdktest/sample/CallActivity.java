@@ -117,7 +117,7 @@ public class CallActivity extends AppCompatActivity {
         });
         remonCall.onClose((closeType) -> addLog("onClose : "+ closeType.toString()));
         remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString() + " / " + e.getDescription()));
-        remonCall.onStat(report -> addLog("Receive report - fps : "+report.getRemoteFrameRate()));
+        remonCall.onStat(report -> addLog("Receive report - fps : "));//+report.getRemoteFrameRate()));
     }
 
     private String mPriorLog = "";
