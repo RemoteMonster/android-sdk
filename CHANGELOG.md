@@ -1,4 +1,12 @@
 # CHANGELOG
+## 2.6.3
+- added a new feature to send video through simulcast on RemonCast, RemonConference
+- updated the WebRTC library to 1.0.30039
+- downgraded an okhttp version to 3.12.x for supporting android api under 20
+- deprecated the legacy audio routine
+- fixed a puaseLocalVideo( boolean )
+
+
 ## 2.6.2
 - added a new feature and functionality for conference call
 - fixed an issues for local video capture

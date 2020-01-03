@@ -78,6 +78,7 @@ public class CastActivity extends AppCompatActivity {
                         .remoteView(mBinding.surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
+                        .isUseAutoProgressbar(false)
                         .build();
                 setCallback(true, castViewer);
 
