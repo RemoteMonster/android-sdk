@@ -1,4 +1,10 @@
 # CHANGELOG
+## 2.6.4
+- added a feature for selective candidate
+- modified a explicit closing about error 
+- fixed an illegal process for error, state
+- fixed minor bugs
+
 ## 2.6.3
 - added a new feature to send video through simulcast on RemonCast, RemonConference
 - updated the WebRTC library to 1.0.30039
