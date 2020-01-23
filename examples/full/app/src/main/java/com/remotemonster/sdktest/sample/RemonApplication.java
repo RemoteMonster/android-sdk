@@ -32,7 +32,6 @@ public class RemonApplication extends Application {
         config.setVideoFps(30);
         config.setStartVideoBitrate(1000);
         config.setAudioStartBitrate(32);
-        config.setStatInterval(2000);
         config.setVideoCall(true);
         config.setLogLevel(Log.INFO);
         config.setKey("1234567890");

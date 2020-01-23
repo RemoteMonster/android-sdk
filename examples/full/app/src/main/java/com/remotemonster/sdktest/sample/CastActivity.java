@@ -78,7 +78,6 @@ public class CastActivity extends AppCompatActivity {
                         .remoteView(mBinding.surfRendererRemote)
                         .serviceId(remonApplication.getConfig().getServiceId())
                         .key(remonApplication.getConfig().getKey())
-                        .isUseAutoProgressbar(false)
                         .build();
                 setCallback(true, castViewer);
 
@@ -156,7 +155,7 @@ public class CastActivity extends AppCompatActivity {
             mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
         });
         remonCast.onClose(() -> finish());
-        remonCast.onError(e -> addLog("error code : " + e.getRemonCode().toString()));
+        remonCast.onError(e -> addLog("error code : " + e.getErrorCode()));
         remonCast.onStat(report -> {
             if (isCastView) {
                 //addLog("Receive report - fps : " + report.getRemoteFrameRate());

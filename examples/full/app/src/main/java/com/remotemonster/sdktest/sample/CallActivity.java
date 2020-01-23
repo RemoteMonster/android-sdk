@@ -116,7 +116,7 @@ public class CallActivity extends AppCompatActivity {
             mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
         });
         remonCall.onClose((closeType) -> addLog("onClose : "+ closeType.toString()));
-        remonCall.onError(e -> addLog("error code : " + e.getRemonCode().toString() + " / " + e.getDescription()));
+        remonCall.onError(e -> addLog("error code : " + e.getErrorCode() + " / " + e.getDescription()));
         remonCall.onStat(report -> addLog("Receive report - fps : "));//+report.getRemoteFrameRate()));
     }
 

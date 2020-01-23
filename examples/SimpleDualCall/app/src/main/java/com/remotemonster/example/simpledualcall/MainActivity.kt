@@ -264,7 +264,7 @@ class MainActivity : AppCompatActivity() {
             // CloseType.MINE : 자신이 close() 를 통해 종료한 경우
             // CloseType.OTHER : 상대방이 close() 를 통해 종료한 경우
             // CloseType.OTHER_UNEXPECTED : 상대방이 끊어져서 연결이 종료된 경우
-            // CloseType.UNKNOWN : 연결 종료 이유 불명확
+            // CloseType.UNKNOWN : 오류로인해 연결 종료, 기타 이유 불명확
             remonCall.onClose { closeType: CloseType ->
                 when( closeType ) {
                     CloseType.OTHER -> Snackbar.make(binding.rootLayout, "상대방이 연결을 종료하였습니다.", Snackbar.LENGTH_SHORT).show()
@@ -295,8 +295,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         // 에러가 발생할 때 호출되는 콜백을 정의합니다.
+        // onError 호출 후 연결이 종료된 경우 onClose 가 이어서 호출 됩니다.
+        // onError 에서는 에러를 저장하거나 로깅 등의 작업을 진행하시고,
+        // onClose 에서 ux 처리를 진행하셔야 합니다.
         remonCall?.onError { e ->
             Log.e("SimpleDualCall", "error="+e.description)
+
         }
 
         if( remonCall is RemonCall ) {

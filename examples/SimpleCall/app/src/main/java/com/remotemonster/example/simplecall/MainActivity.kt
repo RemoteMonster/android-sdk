@@ -26,6 +26,7 @@ import androidx.transition.Fade
 import com.google.android.material.snackbar.Snackbar
 import com.remotemonster.example.simplecall.databinding.ActivityMainBinding
 import com.remotemonster.sdk.RemonCall
+import com.remotemonster.sdk.RemonException
 import com.remotemonster.sdk.data.CloseType
 
 // 가장 단순한 형태의 P2P 통화에 대한 샘플입니다.
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity() {
 
     // 기타
     private lateinit var inputMethodManager:InputMethodManager
+
+    private var latestError:RemonException? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -153,17 +156,30 @@ class MainActivity : AppCompatActivity() {
         // CloseType.MINE : 자신이 close() 를 통해 종료한 경우
         // CloseType.OTHER : 상대방이 close() 를 통해 종료한 경우
         // CloseType.OTHER_UNEXPECTED : 상대방이 끊어져서 연결이 종료된 경우
-        // CloseType.UNKNOWN : 연결 종료 이유 불명확
+        // CloseType.UNKNOWN : 에러에 의한 연결 종료, 기타 연결 종료 이유 불명확
         remonCall?.onClose { closeType:CloseType ->
             updateView(false)
             binding.btnConnect.isEnabled = true
             binding.btnClose.isEnabled = false
+
+            // 에러에 의한 종료인지 체크
+            if(closeType == CloseType.UNKNOWN && latestError != null) {
+                Snackbar.make(
+                    binding.rootLayout,
+                    "오류로 연결이 종료되었습니다. 에러=" + latestError?.description,
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
 
 
         // 에러가 발생할 때 호출되는 콜백을 정의합니다.
+        // 연결이 종료되는 경우 에러 전달 후 onClose가 호출 되므로,
+        // 시나리오에 따른 ux 처리는 onClose에서 진행되어야 합니다.
         remonCall?.onError { e ->
             Log.e("SimpleRemon", "error="+e.description)
+            latestError = e
+            
         }
 
 
