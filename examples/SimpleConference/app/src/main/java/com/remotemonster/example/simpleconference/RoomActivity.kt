@@ -77,10 +77,6 @@ class RoomActivity : AppCompatActivity() {
         mConference.create {
             it.context(this)
 
-                // 현재 그룹통화는 베타 기간으로 아래의 서버 url을 사용해야 합니다.
-                .restUrl("https://conference.remotemonster.com" )
-                .wssUrl( "wss://conference.remotemonster.com/ws" )
-
                 // 일반적인 RemonClient 설정
                 .serviceId( "SERVICEID1")
                 .key("1234567890")
