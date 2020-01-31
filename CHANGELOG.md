@@ -1,4 +1,10 @@
 # CHANGELOG
+## 2.6.5
+- Fix to set up error code with RemonException
+- Add a checking routine for peer connection status
+- Fix monor bugs
+
+
 ## 2.6.4
 - added a feature for selective candidate
 - modified a explicit closing about error 
