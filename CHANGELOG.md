@@ -1,4 +1,12 @@
 # CHANGELOG
+## 2.6.6
+- Integrate a setting properties to the Config
+- Fix a issue HW volume key is not working on RemonCast
+- Fix a setting Config using Builder
+- Migrate error handling of websocket to OnError command
+- Fix the error code issue to assign specific number
+- Add a command for Service OP  
+
 ## 2.6.5
 - Fix to set up error code with RemonException
 - Add a checking routine for peer connection status
