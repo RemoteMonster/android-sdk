@@ -1,4 +1,7 @@
 # CHANGELOG
+## 2.6.7
+- Fix a volume issue using p2p call 
+
 ## 2.6.6
 - Integrate a setting properties to the Config
 - Fix a issue HW volume key is not working on RemonCast
