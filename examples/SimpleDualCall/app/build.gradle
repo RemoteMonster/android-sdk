@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.remotemonster.example.simpledualcall"
         minSdkVersion 21
@@ -46,5 +46,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     /** REMON SDK **/
-    implementation 'com.remotemonster:sdk:2.6.4'
+    implementation 'com.remotemonster:sdk:2.6.7'
 }
