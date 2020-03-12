@@ -13,7 +13,7 @@ RemoteMonster - Livecast Management in the Cloud
 // build.gradle(Module:app)
 
 dependencies {
-    implementation 'com.remotemonster:sdk:2.6.7'
+    implementation 'com.remotemonster:sdk:2.6.8'
 }
 ```
 
@@ -22,6 +22,9 @@ dependencies {
 
 
 ## Examples
+
+### SimpleCall 'Kotlin'
+* [source](https://github.com/RemoteMonster/android-sdk/tree/master/examples/SimpleCall)
 
 ### Full features `Java`
 * [source](https://github.com/RemoteMonster/android-sdk/tree/master/examples/full/)

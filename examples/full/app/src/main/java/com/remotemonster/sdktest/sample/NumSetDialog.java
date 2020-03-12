@@ -2,10 +2,11 @@ package com.remotemonster.sdktest.sample;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.support.annotation.NonNull;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.remon.sdktest.R;
 

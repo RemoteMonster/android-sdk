@@ -1,10 +1,11 @@
 package com.remotemonster.sdktest.sample;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.remon.sdktest.R;
 import com.remon.sdktest.databinding.ActivityCastBinding;
@@ -46,7 +47,7 @@ public class CastActivity extends AppCompatActivity {
                 Config config;
                 config = remonApplication.getConfig();
                 config.setLocalView(mBinding.surfRendererLocal);
-                config.setActivity(CastActivity.this);
+                config.setContext(CastActivity.this);
                 setCallback(false, remonCast);
 
                 connectChId = chid;
@@ -65,7 +66,7 @@ public class CastActivity extends AppCompatActivity {
                     Config config;
                     config = remonApplication.getConfig();
                     config.setRemoteView(mBinding.surfRendererRemote);
-                    config.setActivity(CastActivity.this);
+                    config.setContext(CastActivity.this);
                     setCallback(true, castViewer);
 
                     castViewer.join(connectChId, config);
@@ -154,7 +155,7 @@ public class CastActivity extends AppCompatActivity {
             addLog("onJoin");
             mBinding.surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL);
         });
-        remonCast.onClose(() -> finish());
+        remonCast.onClose(this::finish);
         remonCast.onError(e -> addLog("error code : " + e.getErrorCode()));
         remonCast.onStat(report -> {
             if (isCastView) {

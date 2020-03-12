@@ -33,7 +33,6 @@ android {
 
 repositories {
     jcenter { url "http://jcenter.bintray.com/" }
-    maven { url 'http://demo.remotemonster.com:8082/artifactory/libs-releases-local' }
     google()
     jcenter()
 
@@ -59,7 +58,7 @@ dependencies {
     api 'androidx.multidex:multidex:2.0.1'
 
     /** REMON SDK **/
-    implementation 'com.remotemonster:sdk:2.6.7'
+    implementation 'com.remotemonster:sdk:2.6.8'
 
 
     // 샘플 외부 모듈

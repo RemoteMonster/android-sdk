@@ -3,8 +3,6 @@ package com.remotemonster.example.simpleconference
 import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.util.Log
@@ -18,11 +16,12 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.remotemonster.example.simpleconference.databinding.ActivityRoomBinding
 import com.remotemonster.sdk.RemonConference
+import com.remotemonster.sdk.RemonParticipant
 import org.webrtc.SurfaceViewRenderer
 import kotlin.math.roundToInt
 
 
-// 이 샘플은 안드로이드 SDK 2.6.2 이상 버전이 필요합니다.
+// 이 샘플은 안드로이드 SDK 2.6.8 이상 버전이 필요합니다.
 class RoomActivity : AppCompatActivity() {
     val TAG = "RoomActivity"
 
@@ -74,21 +73,22 @@ class RoomActivity : AppCompatActivity() {
     private fun initRemonConference() {
 
         // 컨퍼런스를 위한 마스터 객체를 생성합니다.
-        mConference.create {
-            it.context(this)
+        mConference.create { participant:RemonParticipant ->
+            participant.context = this
+            participant.serviceId = "SERVICEID1"
+            participant.key="1234567890"
+            participant.videoWidth=480
+            participant.videoHeight=640
+            participant.videoCodec = "VP8"
+            participant.logLevel=0
+            // 마스터유저의 localView 지정
+            participant.localView = mSurfaceViewArray[0]
 
-                // 일반적인 RemonClient 설정
-                .serviceId( "SERVICEID1")
-                .key("1234567890")
-                .videoWidth(640)
-                .videoHeight( 480 )
 
-                // 마스터유저의 localView 지정
-                .localView( mSurfaceViewArray[0] )
 
-        }.then {
+        }.then { channelName:String ->
             // 마스터유저가 송출 채널에 접속하면 호출됩니다.
-            Log.d(TAG, "onCreate: channelName=$it")
+            Log.d(TAG, "onCreate: channelName=$channelName")
         }.close {
             // 마스터유저가 끊어진 경우 호출됩니다.
             // 그룹통화에서 끊어진 것이므로, 다른 유저와의 연결도 모두 끊어집니다.
@@ -102,23 +102,22 @@ class RoomActivity : AppCompatActivity() {
         // 해당 방에 참여합니다.
         // 새로운 유저가 참여하면 호출되는 콜백을 on 메쏘드로 등록합니다.
         mConference.join( mRoomName )
-            .on { name, index, builder ->
+            .on { channelName:String, index:Int, participant:RemonParticipant ->
                 // 다른 사용자가 접속한 경우 호출됩니다.
                 // 그룹통화는 특정 인원의 slot이 존재하고, 참여한 사용자의 slot 번호가 index로 전달됩니다.
-                Log.d(TAG, "User has connected : $name")
+                Log.d(TAG, "User has connected : $channelName")
 
                 // 새로운 유저가 접속하면, 해당 유저의 채널에 접속하기 위해 전달된 builder를 설정해야 합니다.
                 // serviceid, key, url 정보는 master 정보로 설정되며
                 // 필요한 경우 이곳에서 변경 가능 합니다.
-                builder.context(this)
-
-                    // 다른 사용자의 화면을 표시할 remoteView설정
-                    .remoteView( mSurfaceViewArray[index] )
-
+                participant.context = this
+                participant.remoteView = mSurfaceViewArray[index]
+                participant.onComplete {
+                    this.updateViews();
+                }
             }.then {
-                // 다른 사용자와 연결되면 호출됩니다.
-                Log.d(TAG, "viewer onJoin")
-                this.updateViews()
+                // 수신 채널에 접속하면 호출
+
             }.close {
                 print("[ConferenceViewController] onClose")
                 this.updateViews()
@@ -126,9 +125,9 @@ class RoomActivity : AppCompatActivity() {
             }.error {
                 // 다른 사용자와위 연결에  오류 발생시 호출됩니다.
                 this.updateViews()
-
                 Snackbar.make( mBinding.rootLayout, "error="+it.errorCode+",msg="+ it.description, Snackbar.LENGTH_SHORT).show()
             }
+
 
     }
 

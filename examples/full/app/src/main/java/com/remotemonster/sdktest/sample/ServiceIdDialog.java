@@ -2,13 +2,13 @@ package com.remotemonster.sdktest.sample;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import com.remon.sdktest.R;
-import com.remon.sdktest.databinding.DialogSetSeviceidBinding;
+
 
 /**
  * Created by lucas on 2018. 5. 16..

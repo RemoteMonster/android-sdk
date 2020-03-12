@@ -1,4 +1,9 @@
 # CHANGELOG
+## 2.6.8
+- Modify gradle version for android studio 3.6.1
+- Modify conference call initialization
+- Fix a creating peer connection
+
 ## 2.6.7
 - Fix a volume issue using p2p call 
 
