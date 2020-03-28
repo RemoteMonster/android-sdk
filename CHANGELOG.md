@@ -1,4 +1,12 @@
 # CHANGELOG
+## 2.7.0
+- Change conference api for improving usability in each services
+- Modify Websocket handler and 
+- Refactor init sequence to create a peer connection
+- Update gradle version for examples
+- Fix a callback to call after handshaking in websocket
+- Fix a issue for video only stream
+
 ## 2.6.8
 - Modify gradle version for android studio 3.6.1
 - Modify conference call initialization

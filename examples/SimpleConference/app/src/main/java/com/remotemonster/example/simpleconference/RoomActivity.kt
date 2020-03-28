@@ -3,6 +3,8 @@ package com.remotemonster.example.simpleconference
 import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.util.Log
@@ -15,13 +17,15 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.remotemonster.example.simpleconference.databinding.ActivityRoomBinding
+import com.remotemonster.sdk.Config
 import com.remotemonster.sdk.RemonConference
-import com.remotemonster.sdk.RemonParticipant
+import com.remotemonster.sdk.RemonException
+import com.remotemonster.sdk.util.Logger
 import org.webrtc.SurfaceViewRenderer
 import kotlin.math.roundToInt
 
 
-// 이 샘플은 안드로이드 SDK 2.6.8 이상 버전이 필요합니다.
+// 이 샘플은 안드로이드 SDK 2.7.0 이상 버전이 필요합니다.
 class RoomActivity : AppCompatActivity() {
     val TAG = "RoomActivity"
 
@@ -33,15 +37,16 @@ class RoomActivity : AppCompatActivity() {
     private lateinit var mLayouts: Array<ViewGroup>
     private lateinit var mBinding:ActivityRoomBinding
     private lateinit var mSurfaceViewArray: Array<SurfaceViewRenderer>
+    private lateinit var mAvailableView:Array<Boolean>
 
     private lateinit var mRoomName:String
 
+    private var mError:RemonException? = null
 
     // 뷰어 목록
     private var mConference = RemonConference()
-
-
     private var enableLocalAudio = true
+
 
 
     @SuppressLint("MissingPermission")
@@ -69,72 +74,101 @@ class RoomActivity : AppCompatActivity() {
     }
 
 
+    /////////////////////////////////////////////////////////////////////////////////
 
     private fun initRemonConference() {
+        mError = null
+
+
+        // 공통적으로 사용될 기본 설정
+        val config  = Config()
+        config.context = this
+        config.serviceId="SERVICEID1"
+        config.key="1234567890"
+
 
         // 컨퍼런스를 위한 마스터 객체를 생성합니다.
-        mConference.create { participant:RemonParticipant ->
-            participant.context = this
-            participant.serviceId = "SERVICEID1"
-            participant.key="1234567890"
-            participant.videoWidth=480
-            participant.videoHeight=640
-            participant.videoCodec = "VP8"
-            participant.logLevel=0
-            // 마스터유저의 localView 지정
-            participant.localView = mSurfaceViewArray[0]
+        mConference.create ( mRoomName, config ) {
+            // 마스터 유저(송출자,나자신) 초기화
+            it.config.localView = mSurfaceViewArray[0]
+            it.config.remoteView = null
+
+            // 일부 RemonClient의 콜백을 사용하려면 아래와 같은 형태로 콜백을 등록합니다.
+            // 마스터(나자신)의 경우 onClose, onError는 룸 콜백으로 전달되므로 추가로 등록할 필요는 없습니다.
+            it.on( "onComplete") {
+
+            }
+
+            // 뷰 설정
+            mAvailableView[0] = true
+
+        }.on("onRoomCreated") {
+            // 마스터 유저가 접속된 이후에 호출(실제 송출 시작)
+            // TODO: 실제 유저 정보는 각 서비스에서 관리하므로, 서비스에서 채널과 실제 유저 매핑 작업 진행
 
 
+            // tag 객체에 holder 형태로 객체를 지정해 사용할 수 있습니다.
+            // 예제에서는 단순히 view의 index를 저장합니다.
+            it.tag = 0
+            Snackbar.make( mBinding.rootLayout, "ch:${it.id}" , Snackbar.LENGTH_SHORT).show()
+        }.on("onUserJoined") {
+            // 다른 사용자가 입장한 경우 초기화를 위해 호출됨
+            // TODO: 실제 유저 매핑 : it.id 값으로 연결된 실제 유저를 얻습니다.
 
-        }.then { channelName:String ->
-            // 마스터유저가 송출 채널에 접속하면 호출됩니다.
-            Log.d(TAG, "onCreate: channelName=$channelName")
+
+            // 뷰 설정
+            val index = getAvailableView()
+            if( index > 0 ) {
+                it.config.localView = null
+                it.config.remoteView = mSurfaceViewArray[index]
+                it.tag = index
+            }
+
+            // 다른 사용자에 대한 RemonClient 콜백이 필요한 경우 아래와 같이 등록
+            // 룸 콜백으로 참여, 퇴장 이벤트가 전달되므로 특별한 경우가 아니면 등록할 필요는 없습니다.
+            it.on("onComplete") {
+
+            }.on("onClose") {
+
+            }.on( "onError" ) {
+
+            }
+
+            Snackbar.make( mBinding.rootLayout, "${it.id} 참여" , Snackbar.LENGTH_SHORT).show()
+            this.updateViews()
+        }.on("onUserLeaved") {
+            // 다른 사용자가 퇴장한 경우
+            // it.id 와 it.tag 를 참조해 어떤 사용자가 퇴장했는지 확인후 퇴장 처리를 합니다.
+            val index = it.tag as Int
+            mAvailableView[index] = false
+
+
+            Snackbar.make( mBinding.rootLayout, "${it.id} 퇴장" , Snackbar.LENGTH_SHORT).show()
+            this.updateViews()
         }.close {
             // 마스터유저가 끊어진 경우 호출됩니다.
-            // 그룹통화에서 끊어진 것이므로, 다른 유저와의 연결도 모두 끊어집니다.
+            // 송출이 중단되면 그룹통화에서 끊어진 것이므로, 다른 유저와의 연결도 모두 끊어집니다.
+            if(mError != null ) {
+                // 에러로 종료됨
+            } else {
+                // 종료됨
+            }
             Log.d(TAG, "onClose")
         }.error {
+            // 송출 채널의 오류 발생시 호출됩니다.
+            // 오류로 연결이 종료되면 error -> close 순으로 호출됩니다.
+            mError = it
             Log.e(TAG, "error=" + it.description)
             Snackbar.make( mBinding.rootLayout, "error="+it.errorCode+",msg="+ it.description, Snackbar.LENGTH_SHORT).show()
         }
-
-
-        // 해당 방에 참여합니다.
-        // 새로운 유저가 참여하면 호출되는 콜백을 on 메쏘드로 등록합니다.
-        mConference.join( mRoomName )
-            .on { channelName:String, index:Int, participant:RemonParticipant ->
-                // 다른 사용자가 접속한 경우 호출됩니다.
-                // 그룹통화는 특정 인원의 slot이 존재하고, 참여한 사용자의 slot 번호가 index로 전달됩니다.
-                Log.d(TAG, "User has connected : $channelName")
-
-                // 새로운 유저가 접속하면, 해당 유저의 채널에 접속하기 위해 전달된 builder를 설정해야 합니다.
-                // serviceid, key, url 정보는 master 정보로 설정되며
-                // 필요한 경우 이곳에서 변경 가능 합니다.
-                participant.context = this
-                participant.remoteView = mSurfaceViewArray[index]
-                participant.onComplete {
-                    this.updateViews();
-                }
-            }.then {
-                // 수신 채널에 접속하면 호출
-
-            }.close {
-                print("[ConferenceViewController] onClose")
-                this.updateViews()
-
-            }.error {
-                // 다른 사용자와위 연결에  오류 발생시 호출됩니다.
-                this.updateViews()
-                Snackbar.make( mBinding.rootLayout, "error="+it.errorCode+",msg="+ it.description, Snackbar.LENGTH_SHORT).show()
-            }
-
-
     }
 
-    fun initButtons() {
+    /////////////////////////////////////////////////////////////////////////////////
+
+
+    private fun initButtons() {
         // 종료 버튼
         mBinding.imvExit.setOnClickListener {
-
             mConference.leave()
             finish()
         }
@@ -144,16 +178,16 @@ class RoomActivity : AppCompatActivity() {
         mBinding.tbAudio.setOnClickListener {
             enableLocalAudio = !enableLocalAudio
 
-            var participant = mConference.getClient(0)
+            val participant = mConference.me
             participant.setLocalAudioEnabled(enableLocalAudio)
         }
 
     }
 
-    /////////////////////////////////////////////////////////////////////////////////
 
 
-    fun initUI() {
+
+    private fun initUI() {
         mConstraintSet = ConstraintSet()
         mDefaultConstraintSet = ConstraintSet()
 
@@ -186,14 +220,23 @@ class RoomActivity : AppCompatActivity() {
             mBinding.surfRendererRemote5
         )
 
+        mAvailableView = Array(mSurfaceViewArray.size) {false}
     }
 
 
 
+    private fun getAvailableView(): Int {
+        for( i in 0 until this.mAvailableView.size) {
+            if(!mAvailableView[i]) {
+                mAvailableView[i] = true
+                return i
+            }
+        }
+        return -1
+    }
 
 
-
-    fun convertDpToPixel(dp: Float): Int {
+    private fun convertDpToPixel(dp: Float): Int {
         val metrics = Resources.getSystem().displayMetrics
         val px = dp * (metrics.densityDpi / 160f)
         return px.roundToInt()
@@ -201,7 +244,7 @@ class RoomActivity : AppCompatActivity() {
 
 
     // ui constraint를 변경하는 예입니다.
-    fun changeView(index: Int) {
+    private fun changeView(index: Int) {
         mCurrentSelectedIndex = index
         val layoutID = mLayouts[mCurrentSelectedIndex].id
 
@@ -281,7 +324,7 @@ class RoomActivity : AppCompatActivity() {
                 mLayouts[i].bringToFront()
 
             } else {
-               view.setZOrderMediaOverlay(false)
+                view.setZOrderMediaOverlay(false)
             }
         }
 
@@ -301,24 +344,17 @@ class RoomActivity : AppCompatActivity() {
 
 
     fun updateViews() {
-
-
         for (i in 1..5) {
             val root = mLayouts[i]
 
-            val client = mConference.getClient(i)
-            if (client == null) { // 등록된 멤버들중에서 COMPLETE 안된 멤버가 있는지 검색
+            if(!mAvailableView[i]) {
                 mSurfaceViewArray[i].visibility = View.INVISIBLE
                 updateImage(root, View.VISIBLE)
             } else {
                 mSurfaceViewArray[i].visibility = View.VISIBLE
                 updateImage(root, View.INVISIBLE)
             }
-
         }
-
-
-
     }
 
 }

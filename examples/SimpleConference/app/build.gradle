@@ -58,7 +58,7 @@ dependencies {
     api 'androidx.multidex:multidex:2.0.1'
 
     /** REMON SDK **/
-    implementation 'com.remotemonster:sdk:2.6.8'
+    implementation 'com.remotemonster:sdk:2.7.0'
 
 
     // 샘플 외부 모듈

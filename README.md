@@ -13,7 +13,7 @@ RemoteMonster - Livecast Management in the Cloud
 // build.gradle(Module:app)
 
 dependencies {
-    implementation 'com.remotemonster:sdk:2.6.8'
+    implementation 'com.remotemonster:sdk:2.7.0'
 }
 ```
 
@@ -23,12 +23,17 @@ dependencies {
 
 ## Examples
 
-### SimpleCall 'Kotlin'
+### SimpleCall `Kotlin`
 * [source](https://github.com/RemoteMonster/android-sdk/tree/master/examples/SimpleCall)
 
 ### Full features `Java`
 * [source](https://github.com/RemoteMonster/android-sdk/tree/master/examples/full/)
 
+### Simple Conference `Kotlin`
+* [source](https://github.com/RemoteMonster/android-sdk/tree/master/examples/SimpleConference)
+* service reference : 와글 투게더
+    * [android](https://play.google.com/store/apps/details?id=com.remotemonster.waggletogether)
+    * [web](https://waggle.live/)
 
 ## Documents
 
