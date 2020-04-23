@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -53,6 +53,6 @@ dependencies {
 
 
     /** REMON SDK **/
-    implementation 'com.remotemonster:sdk:2.6.8'
+    implementation 'com.remotemonster:sdk:2.7.2'
 
 }

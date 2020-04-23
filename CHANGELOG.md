@@ -1,4 +1,9 @@
 # CHANGELOG
+## 2.7.2
+- Add getter method for RemonParticipant in RemonConfererence
+- Add property for externalCapturer
+- Fix minor bugs
+
 ## 2.7.1
 - Fix a issue for switching to back facing camera
 
