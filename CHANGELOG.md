@@ -1,4 +1,11 @@
 # CHANGELOG
+
+## 2.7.3
+- Fix a issue creating wrong multiple connection in RemonConference
+- Fix setting config to RemonConference
+- Add a 'complete' callback for participant in RemonConference
+
+
 ## 2.7.2
 - Add getter method for RemonParticipant in RemonConfererence
 - Add property for externalCapturer

@@ -3,8 +3,6 @@ package com.remotemonster.example.simpleconference
 import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.util.Log
@@ -20,12 +18,11 @@ import com.remotemonster.example.simpleconference.databinding.ActivityRoomBindin
 import com.remotemonster.sdk.Config
 import com.remotemonster.sdk.RemonConference
 import com.remotemonster.sdk.RemonException
-import com.remotemonster.sdk.util.Logger
 import org.webrtc.SurfaceViewRenderer
 import kotlin.math.roundToInt
 
 
-// 이 샘플은 안드로이드 SDK 2.7.0 이상 버전이 필요합니다.
+// 이 샘플은 안드로이드 SDK 2.7.3 이상 버전이 필요합니다.
 class RoomActivity : AppCompatActivity() {
     val TAG = "RoomActivity"
 
@@ -127,21 +124,29 @@ class RoomActivity : AppCompatActivity() {
             // 다른 사용자에 대한 RemonClient 콜백이 필요한 경우 아래와 같이 등록
             // 룸 콜백으로 참여, 퇴장 이벤트가 전달되므로 특별한 경우가 아니면 등록할 필요는 없습니다.
             it.on("onComplete") {
-
+                // onUserConnected 와 동일
             }.on("onClose") {
-
+                // onUserLeaved 호출뒤에 호출됨
             }.on( "onError" ) {
 
             }
 
             Snackbar.make( mBinding.rootLayout, "${it.id} 참여" , Snackbar.LENGTH_SHORT).show()
             this.updateViews()
+        }.on("onUserConnected") {
+            // sdk 2.7.3 추가
+
+
         }.on("onUserLeaved") {
             // 다른 사용자가 퇴장한 경우
             // it.id 와 it.tag 를 참조해 어떤 사용자가 퇴장했는지 확인후 퇴장 처리를 합니다.
             val index = it.tag as Int
             mAvailableView[index] = false
 
+            if( it.latestError != null) {
+                // 에러로 인해 종료된 경우
+                // 재시도나 에러 메시지 표시 등 서비스에서 구현
+            }
 
             Snackbar.make( mBinding.rootLayout, "${it.id} 퇴장" , Snackbar.LENGTH_SHORT).show()
             this.updateViews()
