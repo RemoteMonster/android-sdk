@@ -1,7 +1,14 @@
 # CHANGELOG
 
+## 2.7.4
+- Modify a stat gathering interval for getting input level
+- Add a feature to change video sink
+- Revise a callback name in RemonConference
+- Modify a function to change input video size
+
+
 ## 2.7.3
-- Fix a issue creating wrong multiple connection in RemonConference
+- Fix an issue creating wrong multiple connection in RemonConference
 - Fix setting config to RemonConference
 - Add a 'complete' callback for participant in RemonConference
 

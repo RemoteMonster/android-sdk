@@ -137,7 +137,7 @@ class RoomActivity : AppCompatActivity() {
             // sdk 2.7.3 추가
 
 
-        }.on("onUserLeaved") {
+        }.on("onUserLeft") {
             // 다른 사용자가 퇴장한 경우
             // it.id 와 it.tag 를 참조해 어떤 사용자가 퇴장했는지 확인후 퇴장 처리를 합니다.
             val index = it.tag as Int
