@@ -1,4 +1,8 @@
 # CHANGELOG
+## 2.7.5
+- Fix an issue with bluethooth in conference
+- Refactor deprecated classes
+
 
 ## 2.7.4
 - Modify a stat gathering interval for getting input level
