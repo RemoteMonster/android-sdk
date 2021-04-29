@@ -14,7 +14,7 @@ RemoteMonster - Livecast Management in the Cloud
 
 allprojects {
     repositories {
-    ...
+    	....
 	maven { url 'https://jitpack.io' }
     }
 }
