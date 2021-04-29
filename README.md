@@ -1,4 +1,4 @@
-[![Bintray](https://img.shields.io/bintray/v/remotemonster/maven/remotemonster-sdk.svg)](https://bintray.com/remotemonster/maven/remotemonster-sdk)
+[![JitPack](https://jitpack.io/v/com.gitlab.kakao-i-connect-live/android-sdk.svg)](https://jitpack.io/#com.gitlab.kakao-i-connect-live/android-sdk)
 
 # RemoteMonster Android SDK
 
