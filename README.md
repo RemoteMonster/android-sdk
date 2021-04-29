@@ -9,11 +9,22 @@ RemoteMonster - Livecast Management in the Cloud
 ## Get SDK
 
 ### Package Manager
-```gradle
+```project:build.gradle
+// build.gradle(Project:root)
+
+allprojects {
+    repositories {
+    ...
+	maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+```module:build.gradle
 // build.gradle(Module:app)
 
 dependencies {
-    implementation 'com.remotemonster:sdk:2.7.0'
+    implementation 'com.gitlab.kakao-i-connect-live:android-sdk:2.9.8'
 }
 ```
 
