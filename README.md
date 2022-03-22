@@ -15,7 +15,7 @@ RemoteMonster - Livecast Management in the Cloud
 allprojects {
     repositories {
     	....
-	maven { url 'https://jitpack.io' }
+	maven { url 'https://icl.jfrog.io/artifactory/kakaoenterprise' }
     }
 }
 ```
@@ -24,7 +24,7 @@ allprojects {
 // build.gradle(Module:app)
 
 dependencies {
-    implementation 'com.gitlab.kakao-i-connect-live:android-sdk:2.9.8'
+    implementation 'com.kakaoenterprise:kakao-i-connect-live:2.9.13'
 }
 ```
 
