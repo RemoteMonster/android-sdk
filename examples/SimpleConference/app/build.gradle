@@ -58,7 +58,7 @@ dependencies {
     api 'androidx.multidex:multidex:2.0.1'
 
     /** REMON SDK **/
-    implementation 'com.remotemonster:sdk:2.7.4'
+    implementation 'com.kakaoenterprise:kakao-i-connect-live:2.9.13'
 
 
     // 샘플 외부 모듈

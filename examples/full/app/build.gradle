@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
     /* Remote monster WebRTC library */
-    api 'com.remotemonster:sdk:2.6.8'
+    implementation 'com.kakaoenterprise:kakao-i-connect-live:2.9.13'
 
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.12'

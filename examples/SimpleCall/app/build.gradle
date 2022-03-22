@@ -53,6 +53,6 @@ dependencies {
 
 
     /** REMON SDK **/
-    implementation 'com.remotemonster:sdk:2.7.2'
+    implementation 'com.kakaoenterprise:kakao-i-connect-live:2.9.13'
 
 }
